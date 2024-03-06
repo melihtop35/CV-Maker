@@ -63,16 +63,6 @@ namespace CV_Maker.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
         /// </summary>
-        internal static System.Drawing.Bitmap user_2935527_1280 {
-            get {
-                object obj = ResourceManager.GetObject("user-2935527_1280", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap türünde yerelleştirilmiş bir kaynak arar.
-        /// </summary>
         internal static System.Drawing.Bitmap user_picture {
             get {
                 object obj = ResourceManager.GetObject("user-picture", resourceCulture);

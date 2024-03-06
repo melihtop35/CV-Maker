@@ -39,7 +39,6 @@
             this.skills2TextBox = new System.Windows.Forms.TextBox();
             this.skills2Txt = new System.Windows.Forms.Label();
             this.languageTxt = new System.Windows.Forms.Label();
-            this.languageComboBox = new System.Windows.Forms.ComboBox();
             this.skillLevelTxt = new System.Windows.Forms.Label();
             this.highSkillsTxt = new System.Windows.Forms.Label();
             this.midSkillsTxt = new System.Windows.Forms.Label();
@@ -93,9 +92,14 @@
             this.label11 = new System.Windows.Forms.Label();
             this.hobiesRichTextBox = new System.Windows.Forms.RichTextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.pdfShowcase = new System.Windows.Forms.Button();
+            this.pdfShowcaseBtn = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.languageListBox = new System.Windows.Forms.ListBox();
+            this.languageProcessBtn = new System.Windows.Forms.Button();
+            this.languageComboBox = new System.Windows.Forms.ComboBox();
+            this.tierComboBox = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.contactGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -197,26 +201,18 @@
             this.languageTxt.AutoSize = true;
             this.languageTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.languageTxt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.languageTxt.Location = new System.Drawing.Point(13, 305);
+            this.languageTxt.Location = new System.Drawing.Point(12, 303);
             this.languageTxt.Name = "languageTxt";
             this.languageTxt.Size = new System.Drawing.Size(99, 20);
             this.languageTxt.TabIndex = 10;
             this.languageTxt.Text = "Dilleri seçiniz";
-            // 
-            // languageComboBox
-            // 
-            this.languageComboBox.FormattingEnabled = true;
-            this.languageComboBox.Location = new System.Drawing.Point(17, 328);
-            this.languageComboBox.Name = "languageComboBox";
-            this.languageComboBox.Size = new System.Drawing.Size(284, 21);
-            this.languageComboBox.TabIndex = 11;
             // 
             // skillLevelTxt
             // 
             this.skillLevelTxt.AutoSize = true;
             this.skillLevelTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 18.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.skillLevelTxt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.skillLevelTxt.Location = new System.Drawing.Point(12, 363);
+            this.skillLevelTxt.Location = new System.Drawing.Point(360, 363);
             this.skillLevelTxt.Name = "skillLevelTxt";
             this.skillLevelTxt.Size = new System.Drawing.Size(306, 29);
             this.skillLevelTxt.TabIndex = 12;
@@ -227,7 +223,7 @@
             this.highSkillsTxt.AutoSize = true;
             this.highSkillsTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.highSkillsTxt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.highSkillsTxt.Location = new System.Drawing.Point(12, 392);
+            this.highSkillsTxt.Location = new System.Drawing.Point(308, 392);
             this.highSkillsTxt.Name = "highSkillsTxt";
             this.highSkillsTxt.Size = new System.Drawing.Size(81, 20);
             this.highSkillsTxt.TabIndex = 13;
@@ -238,7 +234,7 @@
             this.midSkillsTxt.AutoSize = true;
             this.midSkillsTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.midSkillsTxt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.midSkillsTxt.Location = new System.Drawing.Point(159, 392);
+            this.midSkillsTxt.Location = new System.Drawing.Point(441, 392);
             this.midSkillsTxt.Name = "midSkillsTxt";
             this.midSkillsTxt.Size = new System.Drawing.Size(87, 20);
             this.midSkillsTxt.TabIndex = 14;
@@ -249,7 +245,7 @@
             this.lowSkillsTxt.AutoSize = true;
             this.lowSkillsTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lowSkillsTxt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lowSkillsTxt.Location = new System.Drawing.Point(306, 392);
+            this.lowSkillsTxt.Location = new System.Drawing.Point(574, 392);
             this.lowSkillsTxt.Name = "lowSkillsTxt";
             this.lowSkillsTxt.Size = new System.Drawing.Size(125, 20);
             this.lowSkillsTxt.TabIndex = 15;
@@ -257,27 +253,42 @@
             // 
             // highSkillsCheckBox
             // 
+            this.highSkillsCheckBox.CheckOnClick = true;
             this.highSkillsCheckBox.FormattingEnabled = true;
-            this.highSkillsCheckBox.Location = new System.Drawing.Point(16, 415);
+            this.highSkillsCheckBox.HorizontalScrollbar = true;
+            this.highSkillsCheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.highSkillsCheckBox.Location = new System.Drawing.Point(312, 415);
             this.highSkillsCheckBox.Name = "highSkillsCheckBox";
-            this.highSkillsCheckBox.Size = new System.Drawing.Size(141, 169);
+            this.highSkillsCheckBox.Size = new System.Drawing.Size(127, 169);
             this.highSkillsCheckBox.TabIndex = 16;
+            this.highSkillsCheckBox.TabStop = false;
+            this.highSkillsCheckBox.UseTabStops = false;
             // 
             // midSkillsCheckBox
             // 
+            this.midSkillsCheckBox.CheckOnClick = true;
             this.midSkillsCheckBox.FormattingEnabled = true;
-            this.midSkillsCheckBox.Location = new System.Drawing.Point(163, 415);
+            this.midSkillsCheckBox.HorizontalScrollbar = true;
+            this.midSkillsCheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.midSkillsCheckBox.Location = new System.Drawing.Point(445, 415);
             this.midSkillsCheckBox.Name = "midSkillsCheckBox";
-            this.midSkillsCheckBox.Size = new System.Drawing.Size(141, 169);
+            this.midSkillsCheckBox.Size = new System.Drawing.Size(127, 169);
             this.midSkillsCheckBox.TabIndex = 17;
+            this.midSkillsCheckBox.TabStop = false;
+            this.midSkillsCheckBox.UseTabStops = false;
             // 
             // lowSkillsCheckBox
             // 
+            this.lowSkillsCheckBox.CheckOnClick = true;
             this.lowSkillsCheckBox.FormattingEnabled = true;
-            this.lowSkillsCheckBox.Location = new System.Drawing.Point(310, 415);
+            this.lowSkillsCheckBox.HorizontalScrollbar = true;
+            this.lowSkillsCheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lowSkillsCheckBox.Location = new System.Drawing.Point(578, 415);
             this.lowSkillsCheckBox.Name = "lowSkillsCheckBox";
-            this.lowSkillsCheckBox.Size = new System.Drawing.Size(141, 169);
+            this.lowSkillsCheckBox.Size = new System.Drawing.Size(127, 169);
             this.lowSkillsCheckBox.TabIndex = 18;
+            this.lowSkillsCheckBox.TabStop = false;
+            this.lowSkillsCheckBox.UseTabStops = false;
             // 
             // summaryTxt
             // 
@@ -432,7 +443,7 @@
             // 
             // certificateRichTextBox
             // 
-            this.certificateRichTextBox.Location = new System.Drawing.Point(608, 373);
+            this.certificateRichTextBox.Location = new System.Drawing.Point(857, 373);
             this.certificateRichTextBox.Name = "certificateRichTextBox";
             this.certificateRichTextBox.Size = new System.Drawing.Size(140, 211);
             this.certificateRichTextBox.TabIndex = 26;
@@ -443,7 +454,7 @@
             this.ozetTxt.AutoSize = true;
             this.ozetTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.ozetTxt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ozetTxt.Location = new System.Drawing.Point(604, 353);
+            this.ozetTxt.Location = new System.Drawing.Point(853, 353);
             this.ozetTxt.Name = "ozetTxt";
             this.ozetTxt.Size = new System.Drawing.Size(84, 20);
             this.ozetTxt.TabIndex = 25;
@@ -451,7 +462,7 @@
             // 
             // projectRichTextBox
             // 
-            this.projectRichTextBox.Location = new System.Drawing.Point(462, 373);
+            this.projectRichTextBox.Location = new System.Drawing.Point(711, 373);
             this.projectRichTextBox.Name = "projectRichTextBox";
             this.projectRichTextBox.Size = new System.Drawing.Size(140, 211);
             this.projectRichTextBox.TabIndex = 28;
@@ -462,7 +473,7 @@
             this.projectTxt.AutoSize = true;
             this.projectTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.projectTxt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.projectTxt.Location = new System.Drawing.Point(459, 353);
+            this.projectTxt.Location = new System.Drawing.Point(708, 353);
             this.projectTxt.Name = "projectTxt";
             this.projectTxt.Size = new System.Drawing.Size(62, 20);
             this.projectTxt.TabIndex = 27;
@@ -752,9 +763,9 @@
             // 
             // hobiesRichTextBox
             // 
-            this.hobiesRichTextBox.Location = new System.Drawing.Point(754, 373);
+            this.hobiesRichTextBox.Location = new System.Drawing.Point(1002, 373);
             this.hobiesRichTextBox.Name = "hobiesRichTextBox";
-            this.hobiesRichTextBox.Size = new System.Drawing.Size(291, 211);
+            this.hobiesRichTextBox.Size = new System.Drawing.Size(165, 211);
             this.hobiesRichTextBox.TabIndex = 34;
             this.hobiesRichTextBox.Text = "";
             // 
@@ -763,20 +774,21 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label12.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label12.Location = new System.Drawing.Point(750, 353);
+            this.label12.Location = new System.Drawing.Point(998, 353);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(59, 20);
             this.label12.TabIndex = 33;
             this.label12.Text = "Hobiler";
             // 
-            // pdfShowcase
+            // pdfShowcaseBtn
             // 
-            this.pdfShowcase.Location = new System.Drawing.Point(1266, 526);
-            this.pdfShowcase.Name = "pdfShowcase";
-            this.pdfShowcase.Size = new System.Drawing.Size(145, 58);
-            this.pdfShowcase.TabIndex = 35;
-            this.pdfShowcase.Text = "PDF Önizle";
-            this.pdfShowcase.UseVisualStyleBackColor = true;
+            this.pdfShowcaseBtn.Location = new System.Drawing.Point(1310, 548);
+            this.pdfShowcaseBtn.Name = "pdfShowcaseBtn";
+            this.pdfShowcaseBtn.Size = new System.Drawing.Size(101, 36);
+            this.pdfShowcaseBtn.TabIndex = 35;
+            this.pdfShowcaseBtn.Text = "PDF Önizle";
+            this.pdfShowcaseBtn.UseVisualStyleBackColor = true;
+            this.pdfShowcaseBtn.Click += new System.EventHandler(this.pdfShowcaseBtn_Click);
             // 
             // pictureBox
             // 
@@ -784,9 +796,9 @@
             this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox.Image = global::CV_Maker.Properties.Resources.user_picture;
-            this.pictureBox.Location = new System.Drawing.Point(1051, 373);
+            this.pictureBox.Location = new System.Drawing.Point(1173, 373);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(209, 210);
+            this.pictureBox.Size = new System.Drawing.Size(135, 210);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 36;
             this.pictureBox.TabStop = false;
@@ -797,11 +809,67 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label13.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label13.Location = new System.Drawing.Point(1047, 350);
+            this.label13.Location = new System.Drawing.Point(1169, 350);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(98, 20);
             this.label13.TabIndex = 37;
             this.label13.Text = "Resim Yükle";
+            // 
+            // languageListBox
+            // 
+            this.languageListBox.FormattingEnabled = true;
+            this.languageListBox.Location = new System.Drawing.Point(16, 421);
+            this.languageListBox.Name = "languageListBox";
+            this.languageListBox.Size = new System.Drawing.Size(283, 121);
+            this.languageListBox.TabIndex = 41;
+            // 
+            // languageProcessBtn
+            // 
+            this.languageProcessBtn.Location = new System.Drawing.Point(207, 548);
+            this.languageProcessBtn.Name = "languageProcessBtn";
+            this.languageProcessBtn.Size = new System.Drawing.Size(93, 33);
+            this.languageProcessBtn.TabIndex = 42;
+            this.languageProcessBtn.Text = "Dili Ekle";
+            this.languageProcessBtn.UseVisualStyleBackColor = true;
+            this.languageProcessBtn.Click += new System.EventHandler(this.languageProcessBtn_Click);
+            // 
+            // languageComboBox
+            // 
+            this.languageComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.languageComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.languageComboBox.FormattingEnabled = true;
+            this.languageComboBox.Location = new System.Drawing.Point(16, 329);
+            this.languageComboBox.Name = "languageComboBox";
+            this.languageComboBox.Size = new System.Drawing.Size(284, 21);
+            this.languageComboBox.TabIndex = 43;
+            // 
+            // tierComboBox
+            // 
+            this.tierComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.tierComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.tierComboBox.FormattingEnabled = true;
+            this.tierComboBox.Items.AddRange(new object[] {
+            "A1",
+            "A2",
+            "B1",
+            "B2",
+            "C1",
+            "C2"});
+            this.tierComboBox.Location = new System.Drawing.Point(17, 391);
+            this.tierComboBox.Name = "tierComboBox";
+            this.tierComboBox.Size = new System.Drawing.Size(283, 21);
+            this.tierComboBox.TabIndex = 44;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label14.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label14.Location = new System.Drawing.Point(12, 368);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(156, 20);
+            this.label14.TabIndex = 45;
+            this.label14.Text = "Dilin Seviyesini Seçin";
             // 
             // BilgiGiris
             // 
@@ -809,9 +877,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1423, 593);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.tierComboBox);
+            this.Controls.Add(this.languageComboBox);
+            this.Controls.Add(this.languageProcessBtn);
+            this.Controls.Add(this.languageListBox);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.pictureBox);
-            this.Controls.Add(this.pdfShowcase);
+            this.Controls.Add(this.pdfShowcaseBtn);
             this.Controls.Add(this.hobiesRichTextBox);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
@@ -833,7 +906,6 @@
             this.Controls.Add(this.midSkillsTxt);
             this.Controls.Add(this.highSkillsTxt);
             this.Controls.Add(this.skillLevelTxt);
-            this.Controls.Add(this.languageComboBox);
             this.Controls.Add(this.languageTxt);
             this.Controls.Add(this.skills2TextBox);
             this.Controls.Add(this.skills2Txt);
@@ -873,7 +945,6 @@
         private System.Windows.Forms.TextBox skills2TextBox;
         private System.Windows.Forms.Label skills2Txt;
         private System.Windows.Forms.Label languageTxt;
-        private System.Windows.Forms.ComboBox languageComboBox;
         private System.Windows.Forms.Label skillLevelTxt;
         private System.Windows.Forms.Label highSkillsTxt;
         private System.Windows.Forms.Label midSkillsTxt;
@@ -927,9 +998,14 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.RichTextBox hobiesRichTextBox;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button pdfShowcase;
+        private System.Windows.Forms.Button pdfShowcaseBtn;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ListBox languageListBox;
+        private System.Windows.Forms.Button languageProcessBtn;
+        private System.Windows.Forms.ComboBox languageComboBox;
+        private System.Windows.Forms.ComboBox tierComboBox;
+        private System.Windows.Forms.Label label14;
     }
 }
 

@@ -28,7 +28,88 @@ namespace CV_Maker
                 languageComboBox.Items.Add(culture.DisplayName);
             }
         }
-        
+        private void languageProcessBtn_Click(object sender, EventArgs e)
+        {
+            string selectedLanguagesAndTier=$"{languageComboBox.SelectedItem} - {tierComboBox.SelectedItem}";
+            languageListBox.Items.Add(selectedLanguagesAndTier);
+        }
+        public string[] SplitterSkills()
+        {
+            string[] allSkills = new string[0]; // varsayılan olarak boş bir dizi
+
+            // İki metni birleştir ve virgülle ayır
+            string combinedText = skills1TextBox.Text + "," + skills2TextBox.Text;
+
+            if (!string.IsNullOrEmpty(combinedText) && !(combinedText.Contains("Yeteneklerin aralarına virgül ',' bırakın!")))
+            {
+                allSkills = combinedText.Split(',');
+            }
+            // Birleştirilmiş dize dizisini döndür
+            return allSkills;
+        }
+
+        public void FillCheckBoxes()
+        {
+            string[] allSkills = SplitterSkills(); // Tüm yeteneklerin listesi alınır
+
+            highSkillsCheckBox.Items.Clear(); // Yüksek seviyedeki işaret kutusunun öğeleri temizlenir
+            midSkillsCheckBox.Items.Clear(); // Orta seviyedeki işaret kutusunun öğeleri temizlenir
+            lowSkillsCheckBox.Items.Clear(); // Düşük seviyedeki işaret kutusunun öğeleri temizlenir
+
+            foreach (string skill in allSkills)
+            {
+                highSkillsCheckBox.Items.Add(skill); // Yüksek seviyedeki işaret kutusuna yetenek eklenir
+                midSkillsCheckBox.Items.Add(skill); // Orta seviyedeki işaret kutusuna yetenek eklenir
+                lowSkillsCheckBox.Items.Add(skill); // Düşük seviyedeki işaret kutusuna yetenek eklenir
+            }
+
+            // İşaret kutularının kontrol değişim olaylarına olay dinleyicisi eklenir
+            highSkillsCheckBox.ItemCheck += CheckBox_ItemCheck;
+            midSkillsCheckBox.ItemCheck += CheckBox_ItemCheck;
+            lowSkillsCheckBox.ItemCheck += CheckBox_ItemCheck;
+        }
+
+        private void CheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            CheckedListBox checkBox = (CheckedListBox)sender; // Olayı tetikleyen işaret kutusu alınır
+
+            if (e.NewValue == CheckState.Checked) // Yeni işaret durumu "işaretlenmiş" ise
+            {
+                // İşaretlenen öğe alınır
+                string checkedItem = checkBox.Items[e.Index].ToString();
+
+                // Diğer işaret kutularındaki aynı öğelerin işaretleri kaldırılır
+                if (checkBox == highSkillsCheckBox) // Yüksek seviyedeki işaret kutusu ise
+                {
+                    UncheckItemInOtherCheckBoxes(checkedItem, midSkillsCheckBox, lowSkillsCheckBox);
+                }
+                else if (checkBox == midSkillsCheckBox) // Orta seviyedeki işaret kutusu ise
+                {
+                    UncheckItemInOtherCheckBoxes(checkedItem, highSkillsCheckBox, lowSkillsCheckBox);
+                }
+                else if (checkBox == lowSkillsCheckBox) // Düşük seviyedeki işaret kutusu ise
+                {
+                    UncheckItemInOtherCheckBoxes(checkedItem, highSkillsCheckBox, midSkillsCheckBox);
+                }
+            }
+        }
+
+        private void UncheckItemInOtherCheckBoxes(string item, params CheckedListBox[] checkBoxes)
+        {
+            foreach (CheckedListBox checkBox in checkBoxes)
+            {
+                int index = checkBox.Items.IndexOf(item); // Öğenin konumu alınır
+                if (index != -1) // Öğe bulunursa
+                {
+                    checkBox.ItemCheck -= CheckBox_ItemCheck; // Özyinelemeli çağrıyı önlemek için olay dinleyicisi geçici olarak kaldırılır
+                    checkBox.SetItemChecked(index, false); // Öğe işareti kaldırılır
+                    checkBox.ItemCheck += CheckBox_ItemCheck; // Olay dinleyicisi tekrar eklenir
+                }
+            }
+        }
+
+
+
 
 
 
@@ -57,7 +138,10 @@ namespace CV_Maker
                 skills1TextBox.Text = "Yeteneklerin aralarına virgül ',' bırakın!";
                 skills1TextBox.ForeColor = Color.Gray;
             }
+            SplitterSkills();
+            FillCheckBoxes();
         }
+
         private void skills2Back()
         {
             skills2TextBox.ForeColor = Color.Gray;
@@ -82,6 +166,8 @@ namespace CV_Maker
                 skills2TextBox.Text = "Yeteneklerin aralarına virgül ',' bırakın!";
                 skills2TextBox.ForeColor = Color.Gray;
             }
+            SplitterSkills();
+            FillCheckBoxes();      
         }
 
         private void pictureBox_Click(object sender, EventArgs e)
@@ -99,6 +185,11 @@ namespace CV_Maker
                 // Seçilen resmin yolunu al ve PictureBox'a yükle
                 pictureBox.Image = new Bitmap(openFileDialog1.FileName);
             }
+        }
+
+        private void pdfShowcaseBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
