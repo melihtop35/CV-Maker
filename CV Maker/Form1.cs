@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CV_Maker
 {
@@ -17,10 +16,12 @@ namespace CV_Maker
         public BilgiGiris()
         {
             InitializeComponent();
-            skills1Back();
-            skills2Back();
+            InitializeTextBox(skills1TextBox);
+            InitializeTextBox(skills2TextBox);
+            InitializeTextBox(projectRichTextBox);
+            InitializeTextBox(certificateRichTextBox);
+            InitializeTextBox(hobiesRichTextBox);
         }
-
         private void BilgiGiris_Load(object sender, EventArgs e)
         {
             foreach (CultureInfo culture in CultureInfo.GetCultures(CultureTypes.NeutralCultures))
@@ -30,7 +31,7 @@ namespace CV_Maker
         }
         private void languageProcessBtn_Click(object sender, EventArgs e)
         {
-            string selectedLanguagesAndTier=$"{languageComboBox.SelectedItem} - {tierComboBox.SelectedItem}";
+            string selectedLanguagesAndTier = $"{languageComboBox.SelectedItem} - {tierComboBox.SelectedItem}";
             languageListBox.Items.Add(selectedLanguagesAndTier);
         }
         public string[] SplitterSkills()
@@ -40,14 +41,13 @@ namespace CV_Maker
             // İki metni birleştir ve virgülle ayır
             string combinedText = skills1TextBox.Text + "," + skills2TextBox.Text;
 
-            if (!string.IsNullOrEmpty(combinedText) && !(combinedText.Contains("Yeteneklerin aralarına virgül ',' bırakın!")))
+            if (!string.IsNullOrEmpty(combinedText) && !(combinedText.Contains("Yazarken aralarına virgül bırakın!")))
             {
                 allSkills = combinedText.Split(',');
             }
             // Birleştirilmiş dize dizisini döndür
             return allSkills;
         }
-
         public void FillCheckBoxes()
         {
             string[] allSkills = SplitterSkills(); // Tüm yeteneklerin listesi alınır
@@ -68,7 +68,6 @@ namespace CV_Maker
             midSkillsCheckBox.ItemCheck += CheckBox_ItemCheck;
             lowSkillsCheckBox.ItemCheck += CheckBox_ItemCheck;
         }
-
         private void CheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             CheckedListBox checkBox = (CheckedListBox)sender; // Olayı tetikleyen işaret kutusu alınır
@@ -93,7 +92,6 @@ namespace CV_Maker
                 }
             }
         }
-
         private void UncheckItemInOtherCheckBoxes(string item, params CheckedListBox[] checkBoxes)
         {
             foreach (CheckedListBox checkBox in checkBoxes)
@@ -107,69 +105,172 @@ namespace CV_Maker
                 }
             }
         }
-
-
-
-
-
-
-
-        private void skills1Back()
+        private void saveEduBtn_Click(object sender, EventArgs e)
         {
-            skills1TextBox.ForeColor = Color.Gray;
-            skills1TextBox.Text = "Yeteneklerin aralarına virgül ',' bırakın!";
-            skills1TextBox.Enter += Skills1_Enter;
-            skills1TextBox.Leave += Skills1_Leave;
-        }
-        private void Skills1_Enter(object sender, EventArgs e)
-        {
-            // TextBox'a odaklandığında, arka plan metni temizleyin
-            if (skills1TextBox.Text == "Yeteneklerin aralarına virgül ',' bırakın!")
+            string schoolName, schoolDepartment, finishPoint, startDate, finishDate;
+            string educationInfo;
+            if (checkBoxEdu.Checked)
             {
-                skills1TextBox.Text = "";
-                skills1TextBox.ForeColor = SystemColors.WindowText; // TextBox normal yazı rengi
+                educationInfo = "Eğitim bilgisi yok";
+
+                // Eğitim bilgilerini ListBox'a ekle
+                listBoxEdu.Items.Add(educationInfo);
+
+                // GroupBox içindeki metin kutularını temizle
+                ClearTextBoxes(groupBox1);
+            }
+            else
+            {
+                schoolName = schollNameTextBox.Text;
+                schoolDepartment = programTextBox.Text;
+                finishPoint = finishPointTextBox.Text;
+                startDate = startTimePicker.Value.ToShortDateString();
+                if (finishTimePicker.Checked) finishDate = finishTimePicker.Value.ToShortDateString();
+                else finishDate = "Devam etmekte";
+
+                // Eğitim bilgilerini birleştir
+                educationInfo = $"Okul Adı: {schoolName}, Programı: {schoolDepartment}, Başlama Tarihi: {startDate} - Bitirme Tarihi: {finishDate}, Bitirme Puanı: {finishPoint}";
+
+                // Doğrulama: Eğer başlangıç tarihi bitiş tarihinden büyükse hata mesajı göster
+                if (checkBoxEdu.Checked)
+                {
+                    if (startTimePicker.Value > finishTimePicker.Value)
+                    {
+                        MessageBox.Show("Başlangıç tarihi bitiş tarihinden önce olamaz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return; // Doğrulama başarısız olduğu için işlemi sonlandır
+                    }
+                }
+                //Boş bilgileri yokla
+                if (schoolName == "" & schoolDepartment == "" & finishPoint == "")
+                {
+                    educationInfo = "Eğitim bilgisi yok";
+                }
+                else if (schoolName == "")
+                {
+                    MessageBox.Show("Okul adı boş.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (schoolDepartment == "")
+                {
+                    MessageBox.Show("Program boş.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (finishPoint == "")
+                {
+                    MessageBox.Show("Bitirme puanı boş.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                // Eğitim bilgilerini ListBox'a ekle
+                listBoxEdu.Items.Add(educationInfo);
+
+                // GroupBox içindeki metin kutularını temizle
+                ClearTextBoxes(groupBox1);
             }
         }
-        private void Skills1_Leave(object sender, EventArgs e)
+        private void saveJobExpBtn_Click(object sender, EventArgs e)
         {
-            // TextBox odaktan çıktığında, arka plan metnini geri ekleyin (yeterli giriş yoksa)
-            if (string.IsNullOrWhiteSpace(skills1TextBox.Text))
+            string jobName, companyName, positionName, startDate, finishDate;
+            string jobİnfo;
+            if (checkBoxJobExp.Checked)
             {
-                skills1TextBox.Text = "Yeteneklerin aralarına virgül ',' bırakın!";
-                skills1TextBox.ForeColor = Color.Gray;
-            }
-            SplitterSkills();
-            FillCheckBoxes();
-        }
+                jobİnfo = "İş bilgisi yok";
 
-        private void skills2Back()
-        {
-            skills2TextBox.ForeColor = Color.Gray;
-            skills2TextBox.Text = "Yeteneklerin aralarına virgül ',' bırakın!";
-            skills2TextBox.Enter += Skills2_Enter;
-            skills2TextBox.Leave += Skills2_Leave;
-        }
-        private void Skills2_Enter(object sender, EventArgs e)
-        {
-            // TextBox'a odaklandığında, arka plan metni temizleyin
-            if (skills2TextBox.Text == "Yeteneklerin aralarına virgül ',' bırakın!")
-            {
-                skills2TextBox.Text = "";
-                skills2TextBox.ForeColor = SystemColors.WindowText; // TextBox normal yazı rengi
-            }
-        }
-        private void Skills2_Leave(object sender, EventArgs e)
-        {
-            // TextBox odaktan çıktığında, arka plan metnini geri ekleyin (yeterli giriş yoksa)
-            if (string.IsNullOrWhiteSpace(skills2TextBox.Text))
-            {
-                skills2TextBox.Text = "Yeteneklerin aralarına virgül ',' bırakın!";
-                skills2TextBox.ForeColor = Color.Gray;
-            }
-            SplitterSkills();
-            FillCheckBoxes();      
-        }
+                // Eğitim bilgilerini ListBox'a ekle
+                listBoxJobExp.Items.Add(jobİnfo);
 
+                // GroupBox içindeki metin kutularını temizle
+                ClearTextBoxes(groupBox2);
+            }
+            else
+            {
+                jobName = jobTextBox.Text;
+                companyName = companyTextBox.Text;
+                positionName = positionTextBox.Text;
+                startDate = jobStartPicker.Value.ToShortDateString();
+                if (jobFinishPicker.Checked) finishDate = jobFinishPicker.Value.ToShortDateString();
+                else finishDate = "Devam etmekte";
+
+                // Eğitim bilgilerini birleştir
+                jobİnfo = $"İş Adı: {jobName}, Şirket Adı: {companyName}, Çalışılan Pozisyon: {positionName}, Başlama Tarihi: {startDate} - Bitirme Tarihi: {finishDate}";
+
+                // Doğrulama: Eğer başlangıç tarihi bitiş tarihinden büyükse hata mesajı göster
+                if (checkBoxJobExp.Checked)
+                {
+                    if (jobStartPicker.Value > jobFinishPicker.Value)
+                    {
+                        MessageBox.Show("Başlangıç tarihi bitiş tarihinden önce olamaz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return; // Doğrulama başarısız olduğu için işlemi sonlandır
+                    }
+                }
+                //Boş bilgileri yokla
+                if (jobName == "" & companyName == "" & positionName == "")
+                {
+                    jobİnfo = "İş bilgisi yok";
+                }
+                else if (jobName == "")
+                {
+                    MessageBox.Show("Okul adı boş.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (companyName == "")
+                {
+                    MessageBox.Show("Program boş.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (positionName == "")
+                {
+                    MessageBox.Show("Bitirme puanı boş.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                // Eğitim bilgilerini ListBox'a ekle
+                listBoxJobExp.Items.Add(jobİnfo);
+
+                // GroupBox içindeki metin kutularını temizle
+                ClearTextBoxes(groupBox2);
+            }
+        }
+        private void ClearTextBoxes(Control control)
+        {
+            foreach (Control c in control.Controls)
+            {
+                if (c is TextBox)
+                {
+                    ((TextBox)c).Clear();
+                }
+                else if (c is GroupBox)
+                {
+                    ClearTextBoxes(c);
+                }
+            }
+        }
+        private void InitializeTextBox(Control textBox)
+        {
+            if (textBox is TextBox || textBox is RichTextBox)
+            {
+                textBox.ForeColor = Color.Gray;
+                textBox.Text = "Yazarken aralarına virgül bırakın!";
+                textBox.Enter += TextBox_Enter;
+                textBox.Leave += TextBox_Leave;
+            }
+        }
+        private void TextBox_Enter(object sender, EventArgs e)
+        {
+            Control textBox = (Control)sender;
+            if (textBox.Text == "Yazarken aralarına virgül bırakın!")
+            {
+                textBox.Text = "";
+                textBox.ForeColor = SystemColors.WindowText;
+            }
+        }
+        private void TextBox_Leave(object sender, EventArgs e)
+        {
+            Control textBox = (Control)sender;
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                textBox.Text = "Yazarken aralarına virgül bırakın!";
+                textBox.ForeColor = Color.Gray;
+            }
+            if (!textBox.Text.Contains("Yazarken aralarına virgül bırakın!"))
+            {
+                SplitterSkills();
+                FillCheckBoxes();
+            }
+        }
+        //resim işlemi yapan fonksiyon
         private void pictureBox_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -182,11 +283,11 @@ namespace CV_Maker
             {
                 //Eski resmi kaldır
                 pictureBox.Image = null;
+                pictureBox.BackgroundImage = null;
                 // Seçilen resmin yolunu al ve PictureBox'a yükle
                 pictureBox.Image = new Bitmap(openFileDialog1.FileName);
             }
         }
-
         private void pdfShowcaseBtn_Click(object sender, EventArgs e)
         {
 

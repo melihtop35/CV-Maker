@@ -65,7 +65,9 @@
             this.projectRichTextBox = new System.Windows.Forms.RichTextBox();
             this.projectTxt = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.saveBtn = new System.Windows.Forms.Button();
+            this.listBoxEdu = new System.Windows.Forms.ListBox();
+            this.checkBoxEdu = new System.Windows.Forms.CheckBox();
+            this.saveEduBtn = new System.Windows.Forms.Button();
             this.finishTimePicker = new System.Windows.Forms.DateTimePicker();
             this.startTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
@@ -78,7 +80,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.educationTxt = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.listBoxJobExp = new System.Windows.Forms.ListBox();
+            this.checkBoxJobExp = new System.Windows.Forms.CheckBox();
+            this.saveJobExpBtn = new System.Windows.Forms.Button();
             this.jobFinishPicker = new System.Windows.Forms.DateTimePicker();
             this.jobStartPicker = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
@@ -482,7 +486,9 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.groupBox1.Controls.Add(this.saveBtn);
+            this.groupBox1.Controls.Add(this.listBoxEdu);
+            this.groupBox1.Controls.Add(this.checkBoxEdu);
+            this.groupBox1.Controls.Add(this.saveEduBtn);
             this.groupBox1.Controls.Add(this.finishTimePicker);
             this.groupBox1.Controls.Add(this.startTimePicker);
             this.groupBox1.Controls.Add(this.label5);
@@ -497,19 +503,40 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox1.Location = new System.Drawing.Point(801, 31);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(291, 318);
+            this.groupBox1.Size = new System.Drawing.Size(292, 318);
             this.groupBox1.TabIndex = 29;
             this.groupBox1.TabStop = false;
             // 
-            // saveBtn
+            // listBoxEdu
             // 
-            this.saveBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.saveBtn.Location = new System.Drawing.Point(79, 282);
-            this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(150, 30);
-            this.saveBtn.TabIndex = 34;
-            this.saveBtn.Text = "Kaydet";
-            this.saveBtn.UseVisualStyleBackColor = true;
+            this.listBoxEdu.FormattingEnabled = true;
+            this.listBoxEdu.HorizontalScrollbar = true;
+            this.listBoxEdu.Location = new System.Drawing.Point(155, 14);
+            this.listBoxEdu.Name = "listBoxEdu";
+            this.listBoxEdu.Size = new System.Drawing.Size(130, 160);
+            this.listBoxEdu.TabIndex = 42;
+            // 
+            // checkBoxEdu
+            // 
+            this.checkBoxEdu.AutoSize = true;
+            this.checkBoxEdu.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.checkBoxEdu.Location = new System.Drawing.Point(10, 251);
+            this.checkBoxEdu.Name = "checkBoxEdu";
+            this.checkBoxEdu.Size = new System.Drawing.Size(102, 17);
+            this.checkBoxEdu.TabIndex = 36;
+            this.checkBoxEdu.Text = "Eğitim bilgisi yok";
+            this.checkBoxEdu.UseVisualStyleBackColor = true;
+            // 
+            // saveEduBtn
+            // 
+            this.saveEduBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.saveEduBtn.Location = new System.Drawing.Point(79, 282);
+            this.saveEduBtn.Name = "saveEduBtn";
+            this.saveEduBtn.Size = new System.Drawing.Size(150, 30);
+            this.saveEduBtn.TabIndex = 34;
+            this.saveEduBtn.Text = "Kaydet";
+            this.saveEduBtn.UseVisualStyleBackColor = true;
+            this.saveEduBtn.Click += new System.EventHandler(this.saveEduBtn_Click);
             // 
             // finishTimePicker
             // 
@@ -552,10 +579,10 @@
             // finishPointTextBox
             // 
             this.finishPointTextBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.finishPointTextBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.finishPointTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.finishPointTextBox.Location = new System.Drawing.Point(6, 154);
             this.finishPointTextBox.Name = "finishPointTextBox";
-            this.finishPointTextBox.Size = new System.Drawing.Size(279, 20);
+            this.finishPointTextBox.Size = new System.Drawing.Size(144, 20);
             this.finishPointTextBox.TabIndex = 29;
             // 
             // label3
@@ -572,10 +599,10 @@
             // programTextBox
             // 
             this.programTextBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.programTextBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.programTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.programTextBox.Location = new System.Drawing.Point(6, 96);
             this.programTextBox.Name = "programTextBox";
-            this.programTextBox.Size = new System.Drawing.Size(279, 20);
+            this.programTextBox.Size = new System.Drawing.Size(144, 20);
             this.programTextBox.TabIndex = 27;
             // 
             // label2
@@ -592,10 +619,10 @@
             // schollNameTextBox
             // 
             this.schollNameTextBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.schollNameTextBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.schollNameTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.schollNameTextBox.Location = new System.Drawing.Point(6, 39);
             this.schollNameTextBox.Name = "schollNameTextBox";
-            this.schollNameTextBox.Size = new System.Drawing.Size(279, 20);
+            this.schollNameTextBox.Size = new System.Drawing.Size(144, 20);
             this.schollNameTextBox.TabIndex = 25;
             // 
             // label1
@@ -623,7 +650,9 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.listBoxJobExp);
+            this.groupBox2.Controls.Add(this.checkBoxJobExp);
+            this.groupBox2.Controls.Add(this.saveJobExpBtn);
             this.groupBox2.Controls.Add(this.jobFinishPicker);
             this.groupBox2.Controls.Add(this.jobStartPicker);
             this.groupBox2.Controls.Add(this.label6);
@@ -642,15 +671,36 @@
             this.groupBox2.TabIndex = 31;
             this.groupBox2.TabStop = false;
             // 
-            // button1
+            // listBoxJobExp
             // 
-            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button1.Location = new System.Drawing.Point(79, 282);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 30);
-            this.button1.TabIndex = 34;
-            this.button1.Text = "Kaydet";
-            this.button1.UseVisualStyleBackColor = true;
+            this.listBoxJobExp.FormattingEnabled = true;
+            this.listBoxJobExp.HorizontalScrollbar = true;
+            this.listBoxJobExp.Location = new System.Drawing.Point(155, 13);
+            this.listBoxJobExp.Name = "listBoxJobExp";
+            this.listBoxJobExp.Size = new System.Drawing.Size(130, 160);
+            this.listBoxJobExp.TabIndex = 43;
+            // 
+            // checkBoxJobExp
+            // 
+            this.checkBoxJobExp.AutoSize = true;
+            this.checkBoxJobExp.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.checkBoxJobExp.Location = new System.Drawing.Point(10, 250);
+            this.checkBoxJobExp.Name = "checkBoxJobExp";
+            this.checkBoxJobExp.Size = new System.Drawing.Size(98, 17);
+            this.checkBoxJobExp.TabIndex = 35;
+            this.checkBoxJobExp.Text = "İş deneyimi yok";
+            this.checkBoxJobExp.UseVisualStyleBackColor = true;
+            // 
+            // saveJobExpBtn
+            // 
+            this.saveJobExpBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.saveJobExpBtn.Location = new System.Drawing.Point(79, 282);
+            this.saveJobExpBtn.Name = "saveJobExpBtn";
+            this.saveJobExpBtn.Size = new System.Drawing.Size(150, 30);
+            this.saveJobExpBtn.TabIndex = 34;
+            this.saveJobExpBtn.Text = "Kaydet";
+            this.saveJobExpBtn.UseVisualStyleBackColor = true;
+            this.saveJobExpBtn.Click += new System.EventHandler(this.saveJobExpBtn_Click);
             // 
             // jobFinishPicker
             // 
@@ -693,10 +743,10 @@
             // positionTextBox
             // 
             this.positionTextBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.positionTextBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.positionTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.positionTextBox.Location = new System.Drawing.Point(6, 154);
             this.positionTextBox.Name = "positionTextBox";
-            this.positionTextBox.Size = new System.Drawing.Size(279, 20);
+            this.positionTextBox.Size = new System.Drawing.Size(140, 20);
             this.positionTextBox.TabIndex = 29;
             // 
             // label8
@@ -713,10 +763,10 @@
             // companyTextBox
             // 
             this.companyTextBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.companyTextBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.companyTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.companyTextBox.Location = new System.Drawing.Point(6, 96);
             this.companyTextBox.Name = "companyTextBox";
-            this.companyTextBox.Size = new System.Drawing.Size(279, 20);
+            this.companyTextBox.Size = new System.Drawing.Size(140, 20);
             this.companyTextBox.TabIndex = 27;
             // 
             // label9
@@ -733,10 +783,10 @@
             // jobTextBox
             // 
             this.jobTextBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.jobTextBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.jobTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.jobTextBox.Location = new System.Drawing.Point(6, 39);
             this.jobTextBox.Name = "jobTextBox";
-            this.jobTextBox.Size = new System.Drawing.Size(279, 20);
+            this.jobTextBox.Size = new System.Drawing.Size(140, 20);
             this.jobTextBox.TabIndex = 25;
             // 
             // label10
@@ -793,13 +843,13 @@
             // pictureBox
             // 
             this.pictureBox.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.pictureBox.BackgroundImage = global::CV_Maker.Properties.Resources.user_picture;
             this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox.Image = global::CV_Maker.Properties.Resources.user_picture;
             this.pictureBox.Location = new System.Drawing.Point(1173, 373);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(135, 210);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox.TabIndex = 36;
             this.pictureBox.TabStop = false;
             this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
@@ -982,9 +1032,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox finishPointTextBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button saveBtn;
+        private System.Windows.Forms.Button saveEduBtn;
         public System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button saveJobExpBtn;
         private System.Windows.Forms.DateTimePicker jobFinishPicker;
         private System.Windows.Forms.DateTimePicker jobStartPicker;
         private System.Windows.Forms.Label label6;
@@ -1006,6 +1056,10 @@
         private System.Windows.Forms.ComboBox languageComboBox;
         private System.Windows.Forms.ComboBox tierComboBox;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.CheckBox checkBoxEdu;
+        private System.Windows.Forms.CheckBox checkBoxJobExp;
+        private System.Windows.Forms.ListBox listBoxEdu;
+        private System.Windows.Forms.ListBox listBoxJobExp;
     }
 }
 
