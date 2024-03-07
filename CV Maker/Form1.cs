@@ -402,7 +402,7 @@ namespace CV_Maker
             // 'RichTextBox' içeriğini virgülle bölmek için SplitterRichTextBox fonksiyonunu kullan ve doğrudan 'lines' dizisine ekle
             lines = lines.Concat(SplitterRichTextBox(projectRichTextBox,"Projeler")).ToArray();
             lines = lines.Concat(SplitterRichTextBox(certificateRichTextBox,"Sertifikalar")).ToArray();
-            lines = lines.Concat(new string[] { "Projeler", project, "Sertifikalar", certificate, "Hobiler", hobies }).ToArray();
+            lines = lines.Concat(new string[] {"Hobiler", hobies }).ToArray();
 
 
 
