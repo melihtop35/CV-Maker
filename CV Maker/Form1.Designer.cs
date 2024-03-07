@@ -51,7 +51,7 @@
             this.phoneTextBox = new System.Windows.Forms.TextBox();
             this.contactGroupBox = new System.Windows.Forms.GroupBox();
             this.emailTxt = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.emailTextBox = new System.Windows.Forms.TextBox();
             this.adressTxt = new System.Windows.Forms.Label();
             this.adressTextBox = new System.Windows.Forms.TextBox();
             this.githubTxt = new System.Windows.Forms.Label();
@@ -76,7 +76,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.programTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.schollNameTextBox = new System.Windows.Forms.TextBox();
+            this.schoolNameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.educationTxt = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -144,14 +144,14 @@
             this.surnameTxtBox.Location = new System.Drawing.Point(16, 87);
             this.surnameTxtBox.Name = "surnameTxtBox";
             this.surnameTxtBox.Size = new System.Drawing.Size(284, 20);
-            this.surnameTxtBox.TabIndex = 3;
+            this.surnameTxtBox.TabIndex = 2;
             // 
             // jobTxtBox
             // 
             this.jobTxtBox.Location = new System.Drawing.Point(16, 146);
             this.jobTxtBox.Name = "jobTxtBox";
             this.jobTxtBox.Size = new System.Drawing.Size(284, 20);
-            this.jobTxtBox.TabIndex = 5;
+            this.jobTxtBox.TabIndex = 3;
             // 
             // jobTxt
             // 
@@ -169,7 +169,7 @@
             this.skills1TextBox.Location = new System.Drawing.Point(16, 206);
             this.skills1TextBox.Name = "skills1TextBox";
             this.skills1TextBox.Size = new System.Drawing.Size(284, 20);
-            this.skills1TextBox.TabIndex = 7;
+            this.skills1TextBox.TabIndex = 4;
             // 
             // skills1Txt
             // 
@@ -187,7 +187,7 @@
             this.skills2TextBox.Location = new System.Drawing.Point(16, 266);
             this.skills2TextBox.Name = "skills2TextBox";
             this.skills2TextBox.Size = new System.Drawing.Size(284, 20);
-            this.skills2TextBox.TabIndex = 9;
+            this.skills2TextBox.TabIndex = 5;
             // 
             // skills2Txt
             // 
@@ -310,23 +310,24 @@
             this.sumRichTextBox.Location = new System.Drawing.Point(306, 32);
             this.sumRichTextBox.Name = "sumRichTextBox";
             this.sumRichTextBox.Size = new System.Drawing.Size(192, 317);
-            this.sumRichTextBox.TabIndex = 20;
+            this.sumRichTextBox.TabIndex = 9;
             this.sumRichTextBox.Text = "";
             // 
             // phoneTextBox
             // 
+            this.phoneTextBox.AcceptsTab = true;
             this.phoneTextBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.phoneTextBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.phoneTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.phoneTextBox.Location = new System.Drawing.Point(6, 39);
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.Size = new System.Drawing.Size(279, 20);
-            this.phoneTextBox.TabIndex = 22;
+            this.phoneTextBox.TabIndex = 10;
             // 
             // contactGroupBox
             // 
             this.contactGroupBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.contactGroupBox.Controls.Add(this.emailTxt);
-            this.contactGroupBox.Controls.Add(this.textBox3);
+            this.contactGroupBox.Controls.Add(this.emailTextBox);
             this.contactGroupBox.Controls.Add(this.adressTxt);
             this.contactGroupBox.Controls.Add(this.adressTextBox);
             this.contactGroupBox.Controls.Add(this.githubTxt);
@@ -354,14 +355,15 @@
             this.emailTxt.TabIndex = 31;
             this.emailTxt.Text = "E-Posta";
             // 
-            // textBox3
+            // emailTextBox
             // 
-            this.textBox3.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.textBox3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textBox3.Location = new System.Drawing.Point(6, 96);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(279, 20);
-            this.textBox3.TabIndex = 30;
+            this.emailTextBox.AcceptsTab = true;
+            this.emailTextBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.emailTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.emailTextBox.Location = new System.Drawing.Point(6, 96);
+            this.emailTextBox.Name = "emailTextBox";
+            this.emailTextBox.Size = new System.Drawing.Size(279, 20);
+            this.emailTextBox.TabIndex = 11;
             // 
             // adressTxt
             // 
@@ -376,12 +378,13 @@
             // 
             // adressTextBox
             // 
+            this.adressTextBox.AcceptsTab = true;
             this.adressTextBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.adressTextBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.adressTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.adressTextBox.Location = new System.Drawing.Point(6, 273);
             this.adressTextBox.Name = "adressTextBox";
             this.adressTextBox.Size = new System.Drawing.Size(279, 20);
-            this.adressTextBox.TabIndex = 28;
+            this.adressTextBox.TabIndex = 14;
             // 
             // githubTxt
             // 
@@ -396,12 +399,13 @@
             // 
             // githubTextBox
             // 
+            this.githubTextBox.AcceptsTab = true;
             this.githubTextBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.githubTextBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.githubTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.githubTextBox.Location = new System.Drawing.Point(6, 210);
             this.githubTextBox.Name = "githubTextBox";
             this.githubTextBox.Size = new System.Drawing.Size(279, 20);
-            this.githubTextBox.TabIndex = 26;
+            this.githubTextBox.TabIndex = 13;
             // 
             // linkedlnTxt
             // 
@@ -416,12 +420,13 @@
             // 
             // linkedlnTextBox
             // 
+            this.linkedlnTextBox.AcceptsTab = true;
             this.linkedlnTextBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.linkedlnTextBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.linkedlnTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.linkedlnTextBox.Location = new System.Drawing.Point(6, 154);
             this.linkedlnTextBox.Name = "linkedlnTextBox";
             this.linkedlnTextBox.Size = new System.Drawing.Size(279, 20);
-            this.linkedlnTextBox.TabIndex = 24;
+            this.linkedlnTextBox.TabIndex = 12;
             // 
             // phoneNubmerTxt
             // 
@@ -450,7 +455,7 @@
             this.certificateRichTextBox.Location = new System.Drawing.Point(857, 373);
             this.certificateRichTextBox.Name = "certificateRichTextBox";
             this.certificateRichTextBox.Size = new System.Drawing.Size(140, 211);
-            this.certificateRichTextBox.TabIndex = 26;
+            this.certificateRichTextBox.TabIndex = 28;
             this.certificateRichTextBox.Text = "";
             // 
             // ozetTxt
@@ -469,7 +474,7 @@
             this.projectRichTextBox.Location = new System.Drawing.Point(711, 373);
             this.projectRichTextBox.Name = "projectRichTextBox";
             this.projectRichTextBox.Size = new System.Drawing.Size(140, 211);
-            this.projectRichTextBox.TabIndex = 28;
+            this.projectRichTextBox.TabIndex = 27;
             this.projectRichTextBox.Text = "";
             // 
             // projectTxt
@@ -497,14 +502,14 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.programTextBox);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.schollNameTextBox);
+            this.groupBox1.Controls.Add(this.schoolNameTextBox);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox1.Location = new System.Drawing.Point(801, 31);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(292, 318);
-            this.groupBox1.TabIndex = 29;
+            this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             // 
             // listBoxEdu
@@ -523,7 +528,7 @@
             this.checkBoxEdu.Location = new System.Drawing.Point(10, 251);
             this.checkBoxEdu.Name = "checkBoxEdu";
             this.checkBoxEdu.Size = new System.Drawing.Size(102, 17);
-            this.checkBoxEdu.TabIndex = 36;
+            this.checkBoxEdu.TabIndex = 99;
             this.checkBoxEdu.Text = "Eğitim bilgisi yok";
             this.checkBoxEdu.UseVisualStyleBackColor = true;
             // 
@@ -533,7 +538,7 @@
             this.saveEduBtn.Location = new System.Drawing.Point(79, 282);
             this.saveEduBtn.Name = "saveEduBtn";
             this.saveEduBtn.Size = new System.Drawing.Size(150, 30);
-            this.saveEduBtn.TabIndex = 34;
+            this.saveEduBtn.TabIndex = 20;
             this.saveEduBtn.Text = "Kaydet";
             this.saveEduBtn.UseVisualStyleBackColor = true;
             this.saveEduBtn.Click += new System.EventHandler(this.saveEduBtn_Click);
@@ -545,14 +550,14 @@
             this.finishTimePicker.Name = "finishTimePicker";
             this.finishTimePicker.ShowCheckBox = true;
             this.finishTimePicker.Size = new System.Drawing.Size(130, 20);
-            this.finishTimePicker.TabIndex = 33;
+            this.finishTimePicker.TabIndex = 19;
             // 
             // startTimePicker
             // 
             this.startTimePicker.Location = new System.Drawing.Point(10, 211);
             this.startTimePicker.Name = "startTimePicker";
             this.startTimePicker.Size = new System.Drawing.Size(140, 20);
-            this.startTimePicker.TabIndex = 32;
+            this.startTimePicker.TabIndex = 18;
             // 
             // label5
             // 
@@ -583,7 +588,7 @@
             this.finishPointTextBox.Location = new System.Drawing.Point(6, 154);
             this.finishPointTextBox.Name = "finishPointTextBox";
             this.finishPointTextBox.Size = new System.Drawing.Size(144, 20);
-            this.finishPointTextBox.TabIndex = 29;
+            this.finishPointTextBox.TabIndex = 17;
             // 
             // label3
             // 
@@ -603,7 +608,7 @@
             this.programTextBox.Location = new System.Drawing.Point(6, 96);
             this.programTextBox.Name = "programTextBox";
             this.programTextBox.Size = new System.Drawing.Size(144, 20);
-            this.programTextBox.TabIndex = 27;
+            this.programTextBox.TabIndex = 16;
             // 
             // label2
             // 
@@ -616,14 +621,14 @@
             this.label2.TabIndex = 26;
             this.label2.Text = "Programı";
             // 
-            // schollNameTextBox
+            // schoolNameTextBox
             // 
-            this.schollNameTextBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.schollNameTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.schollNameTextBox.Location = new System.Drawing.Point(6, 39);
-            this.schollNameTextBox.Name = "schollNameTextBox";
-            this.schollNameTextBox.Size = new System.Drawing.Size(144, 20);
-            this.schollNameTextBox.TabIndex = 25;
+            this.schoolNameTextBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.schoolNameTextBox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.schoolNameTextBox.Location = new System.Drawing.Point(6, 39);
+            this.schoolNameTextBox.Name = "schoolNameTextBox";
+            this.schoolNameTextBox.Size = new System.Drawing.Size(144, 20);
+            this.schoolNameTextBox.TabIndex = 15;
             // 
             // label1
             // 
@@ -668,7 +673,7 @@
             this.groupBox2.Location = new System.Drawing.Point(1099, 32);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(291, 318);
-            this.groupBox2.TabIndex = 31;
+            this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
             // 
             // listBoxJobExp
@@ -687,7 +692,7 @@
             this.checkBoxJobExp.Location = new System.Drawing.Point(10, 250);
             this.checkBoxJobExp.Name = "checkBoxJobExp";
             this.checkBoxJobExp.Size = new System.Drawing.Size(98, 17);
-            this.checkBoxJobExp.TabIndex = 35;
+            this.checkBoxJobExp.TabIndex = 98;
             this.checkBoxJobExp.Text = "İş deneyimi yok";
             this.checkBoxJobExp.UseVisualStyleBackColor = true;
             // 
@@ -697,7 +702,7 @@
             this.saveJobExpBtn.Location = new System.Drawing.Point(79, 282);
             this.saveJobExpBtn.Name = "saveJobExpBtn";
             this.saveJobExpBtn.Size = new System.Drawing.Size(150, 30);
-            this.saveJobExpBtn.TabIndex = 34;
+            this.saveJobExpBtn.TabIndex = 26;
             this.saveJobExpBtn.Text = "Kaydet";
             this.saveJobExpBtn.UseVisualStyleBackColor = true;
             this.saveJobExpBtn.Click += new System.EventHandler(this.saveJobExpBtn_Click);
@@ -709,14 +714,14 @@
             this.jobFinishPicker.Name = "jobFinishPicker";
             this.jobFinishPicker.ShowCheckBox = true;
             this.jobFinishPicker.Size = new System.Drawing.Size(130, 20);
-            this.jobFinishPicker.TabIndex = 33;
+            this.jobFinishPicker.TabIndex = 25;
             // 
             // jobStartPicker
             // 
             this.jobStartPicker.Location = new System.Drawing.Point(6, 211);
             this.jobStartPicker.Name = "jobStartPicker";
             this.jobStartPicker.Size = new System.Drawing.Size(140, 20);
-            this.jobStartPicker.TabIndex = 32;
+            this.jobStartPicker.TabIndex = 24;
             // 
             // label6
             // 
@@ -747,7 +752,7 @@
             this.positionTextBox.Location = new System.Drawing.Point(6, 154);
             this.positionTextBox.Name = "positionTextBox";
             this.positionTextBox.Size = new System.Drawing.Size(140, 20);
-            this.positionTextBox.TabIndex = 29;
+            this.positionTextBox.TabIndex = 23;
             // 
             // label8
             // 
@@ -767,7 +772,7 @@
             this.companyTextBox.Location = new System.Drawing.Point(6, 96);
             this.companyTextBox.Name = "companyTextBox";
             this.companyTextBox.Size = new System.Drawing.Size(140, 20);
-            this.companyTextBox.TabIndex = 27;
+            this.companyTextBox.TabIndex = 22;
             // 
             // label9
             // 
@@ -787,7 +792,7 @@
             this.jobTextBox.Location = new System.Drawing.Point(6, 39);
             this.jobTextBox.Name = "jobTextBox";
             this.jobTextBox.Size = new System.Drawing.Size(140, 20);
-            this.jobTextBox.TabIndex = 25;
+            this.jobTextBox.TabIndex = 21;
             // 
             // label10
             // 
@@ -816,7 +821,7 @@
             this.hobiesRichTextBox.Location = new System.Drawing.Point(1002, 373);
             this.hobiesRichTextBox.Name = "hobiesRichTextBox";
             this.hobiesRichTextBox.Size = new System.Drawing.Size(165, 211);
-            this.hobiesRichTextBox.TabIndex = 34;
+            this.hobiesRichTextBox.TabIndex = 29;
             this.hobiesRichTextBox.Text = "";
             // 
             // label12
@@ -849,7 +854,7 @@
             this.pictureBox.Location = new System.Drawing.Point(1173, 373);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(135, 210);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 36;
             this.pictureBox.TabStop = false;
             this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
@@ -878,7 +883,7 @@
             this.languageProcessBtn.Location = new System.Drawing.Point(207, 548);
             this.languageProcessBtn.Name = "languageProcessBtn";
             this.languageProcessBtn.Size = new System.Drawing.Size(93, 33);
-            this.languageProcessBtn.TabIndex = 42;
+            this.languageProcessBtn.TabIndex = 8;
             this.languageProcessBtn.Text = "Dili Ekle";
             this.languageProcessBtn.UseVisualStyleBackColor = true;
             this.languageProcessBtn.Click += new System.EventHandler(this.languageProcessBtn_Click);
@@ -891,7 +896,7 @@
             this.languageComboBox.Location = new System.Drawing.Point(16, 329);
             this.languageComboBox.Name = "languageComboBox";
             this.languageComboBox.Size = new System.Drawing.Size(284, 21);
-            this.languageComboBox.TabIndex = 43;
+            this.languageComboBox.TabIndex = 6;
             // 
             // tierComboBox
             // 
@@ -908,7 +913,7 @@
             this.tierComboBox.Location = new System.Drawing.Point(17, 391);
             this.tierComboBox.Name = "tierComboBox";
             this.tierComboBox.Size = new System.Drawing.Size(283, 21);
-            this.tierComboBox.TabIndex = 44;
+            this.tierComboBox.TabIndex = 7;
             // 
             // label14
             // 
@@ -1011,7 +1016,7 @@
         private System.Windows.Forms.Label phoneNubmerTxt;
         private System.Windows.Forms.Label contactTxt;
         private System.Windows.Forms.Label emailTxt;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox emailTextBox;
         private System.Windows.Forms.Label adressTxt;
         private System.Windows.Forms.TextBox adressTextBox;
         private System.Windows.Forms.Label githubTxt;
@@ -1024,7 +1029,7 @@
         private System.Windows.Forms.Label educationTxt;
         private System.Windows.Forms.TextBox programTextBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox schollNameTextBox;
+        private System.Windows.Forms.TextBox schoolNameTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker finishTimePicker;
         private System.Windows.Forms.DateTimePicker startTimePicker;
