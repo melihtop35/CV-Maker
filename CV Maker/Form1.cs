@@ -45,10 +45,10 @@ namespace CV_Maker
             // Birleştirilmiş dize dizisini döndür
             return allSkills;
         }
-        public string[] SplitterRichTextBox(RichTextBox textBox,string text)
+        public string[] SplitterRichTextBox(RichTextBox textBox, string text)
         {
             string[] richTextBox = new string[0]; // varsayılan olarak boş bir dizi
-            string combinedText = text+","+textBox.Text;
+            string combinedText = text + "," + textBox.Text;
             richTextBox = combinedText.Split(',');
             return richTextBox;
         }
@@ -397,12 +397,12 @@ namespace CV_Maker
             }
 
             // PDF içeriğini oluştur
-            string[] lines = { name + surname, job, "İletişim", phone, email, linkdln, github, adress, "Yetenekler", "İleri Seviye: " + highSkills, "Orta Seviye: " + midSkills, "Başlangıç Seviye: " + lowSkills, "Diller", string.Join(", ", languages), "Özet: " + summary, "Eğitim", string.Join(", ", education), "Deneyim", string.Join(", ", jobExperience) };
+            string[] lines = { name + " " + surname, job, /*"İletişim", phone, email, linkdln, github, adress, "Yetenekler", "İleri Seviye: " + highSkills, "Orta Seviye: " + midSkills, "Başlangıç Seviye: " + lowSkills, "Diller", string.Join(", ", languages), "Özet: " + summary, "Eğitim", string.Join(", ", education), "Deneyim", string.Join(", ", jobExperience)*/ };
 
             // 'RichTextBox' içeriğini virgülle bölmek için SplitterRichTextBox fonksiyonunu kullan ve doğrudan 'lines' dizisine ekle
-            lines = lines.Concat(SplitterRichTextBox(projectRichTextBox,"Projeler")).ToArray();
-            lines = lines.Concat(SplitterRichTextBox(certificateRichTextBox,"Sertifikalar")).ToArray();
-            lines = lines.Concat(new string[] {"Hobiler", hobies }).ToArray();
+            lines = lines.Concat(SplitterRichTextBox(projectRichTextBox, "Projeler")).ToArray();
+            lines = lines.Concat(SplitterRichTextBox(certificateRichTextBox, "Sertifikalar")).ToArray();
+            lines = lines.Concat(new string[] { "Hobiler", hobies }).ToArray();
 
 
 
@@ -421,8 +421,9 @@ namespace CV_Maker
                 // Resim yolunu PdfHelper.CreatePdf metoduna iletiyoruz
                 PdfHelper.CreatePdf(outputPath, lines, selectedImagePath);
 
-                MessageBox.Show("PDF dosyası oluşturuldu: " + outputPath);
+                //MessageBox.Show("PDF dosyası oluşturuldu: " + outputPath);
             }
+            BilgiGiris.ActiveForm.Close();
         }
     }
 }
