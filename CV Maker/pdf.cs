@@ -190,27 +190,55 @@ public class PdfHelper
             // Metni yazma işlemi
             string currentLine = lines[i];
             double currentX = iconRight;
-            double remainingWidth = maxTextWidth + 50;
+            double remainingWidth = maxTextWidth + 55;
 
-            while (gfx.MeasureString(currentLine, font).Width > remainingWidth)
+            if (i == 7)
             {
-                // Metnin genişliği maksimum genişliği aşıyorsa wrap yap
-                int lengthToFit = (int)(currentLine.Length * remainingWidth / gfx.MeasureString(currentLine, font).Width);
-                string lineToDraw = currentLine.Substring(0, lengthToFit);
-                gfx.DrawString(lineToDraw, font, XBrushes.Black, currentX, startY + 12.5);
-                currentLine = currentLine.Substring(lengthToFit);
-                currentX = 10;
-                startY += lineHeight + 10;
-                remainingWidth = maxTextWidth + 50;
+                // lines[7] için özel wrap işlemi
+                string[] words = currentLine.Split(' ');
+                string lineToDraw = "";
+                foreach (string word in words)
+                {
+                    string tempLine = lineToDraw + " " + word;
+                    if (gfx.MeasureString(tempLine, font).Width > remainingWidth)
+                    {
+                        gfx.DrawString(lineToDraw.Trim(), font, XBrushes.Black, currentX, startY + 12.5);
+                        startY += lineHeight;
+                        lineToDraw = word;
+                    }
+                    else
+                    {
+                        lineToDraw = tempLine;
+                    }
+                }
+                if (!string.IsNullOrEmpty(lineToDraw))
+                {
+                    gfx.DrawString(lineToDraw.Trim(), font, XBrushes.Black, currentX, startY + 12.5);
+                }
             }
 
-            // Kalan metni yaz
-            gfx.DrawString(currentLine, font, XBrushes.Black, iconRight, startY + 12.5);
+            else
+            {
+                // Diğer satırlar için standart wrap işlemi
+                while (gfx.MeasureString(currentLine, font).Width > remainingWidth)
+                {
+                    int lengthToFit = (int)(currentLine.Length * remainingWidth / gfx.MeasureString(currentLine, font).Width);
+                    string lineToDraw = currentLine.Substring(0, lengthToFit);
+                    gfx.DrawString(lineToDraw, font, XBrushes.Black, currentX, startY + 12.5);
+                    currentLine = currentLine.Substring(lengthToFit);
+                    currentX = 10;
+                    startY += lineHeight;
+                    remainingWidth = maxTextWidth + 50;
+                }
+
+                gfx.DrawString(currentLine, font, XBrushes.Black, iconRight, startY + 12.5);
+            }
 
             // Bir sonraki satıra geçme
             startY += lineHeight + 10;
         }
     }
+
 
     private static void DrawSkills(XGraphics gfx, XFont font, string[] lines)
     {
