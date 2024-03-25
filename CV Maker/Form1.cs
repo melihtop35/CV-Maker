@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 
 
 namespace CV_Maker
@@ -397,7 +398,7 @@ namespace CV_Maker
             }
 
             // PDF içeriğini oluştur
-            string[] lines = { name + " " + surname, job, /*"İletişim", phone, email, linkdln, github, adress, "Yetenekler", "İleri Seviye: " + highSkills, "Orta Seviye: " + midSkills, "Başlangıç Seviye: " + lowSkills, "Diller", string.Join(", ", languages), "Özet: " + summary, "Eğitim", string.Join(", ", education), "Deneyim", string.Join(", ", jobExperience)*/ };
+            string[] lines = { name + " " + surname, job,summary ,phone, email, linkdln, github, adress, /*"Yetenekler", "İleri Seviye: " + highSkills, "Orta Seviye: " + midSkills, "Başlangıç Seviye: " + lowSkills, "Diller", string.Join(", ", languages), "Eğitim", string.Join(", ", education), "Deneyim", string.Join(", ", jobExperience)*/ };
 
             // 'RichTextBox' içeriğini virgülle bölmek için SplitterRichTextBox fonksiyonunu kullan ve doğrudan 'lines' dizisine ekle
             lines = lines.Concat(SplitterRichTextBox(projectRichTextBox, "Projeler")).ToArray();
@@ -410,6 +411,7 @@ namespace CV_Maker
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PDF Dosyası|*.pdf";
             saveFileDialog.Title = "PDF Kaydet";
+            saveFileDialog.FileName = "CV.pdf"; 
             saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads"; // Varsayılan olarak indirilenler klasörü
             saveFileDialog.ShowDialog();
 
@@ -417,6 +419,12 @@ namespace CV_Maker
             if (saveFileDialog.FileName != "")
             {
                 string outputPath = saveFileDialog.FileName;
+
+                // Kullanıcı dosya adı belirtmediyse, varsayılan adı kullan
+                if (Path.GetFileName(outputPath) == "")
+                {
+                    outputPath = Path.Combine(Path.GetDirectoryName(outputPath), "CV.pdf");
+                }
 
                 // Resim yolunu PdfHelper.CreatePdf metoduna iletiyoruz
                 PdfHelper.CreatePdf(outputPath, lines, selectedImagePath);
