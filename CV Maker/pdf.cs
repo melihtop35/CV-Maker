@@ -1,4 +1,5 @@
 ﻿using PdfSharp.Drawing;
+using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
 using System;
 using System.IO;
@@ -32,15 +33,6 @@ public class PdfHelper
         // Özet
         DrawSummary(gfx, font, lines);
 
-        //// Yetenekler
-        //DrawSkills(gfx, font, lines);
-
-        //// Diller
-        //DrawLanguages(gfx, font, lines);
-
-        //// Eğitim bilgileri
-        //DrawEducation(gfx, font, lines);
-
         //// Deneyim bilgileri
         //DrawJobExperience(gfx, font, lines);
 
@@ -65,28 +57,47 @@ public class PdfHelper
 
     private static void DrawBasedInfo(XGraphics gfx, XFont headerFont, string[] lines)
     {
-        double startX = 70;
+        double startX = 68;
         double startY = 42;
 
-        // Kare boyutları
-        double squareWidth = 360;
+        // Metni ölçmek için kullanılacak kare boyutları
+        double squareWidth = 355;
         double squareHeight = 110;
 
+        gfx.DrawRectangle(XPens.Black, startX, startY, squareWidth, squareHeight);
         // Ad soyadı yerleştirin
-        double textX = (squareWidth / 2 + startX);
-        double textY = (squareHeight / 2 + (startY / 2)); // Kare yüksekliğinin çeyreği kadar aşağıda
-        gfx.DrawString(lines[0].ToUpper(), headerFont, XBrushes.Black, textX, textY, XStringFormats.Center);
+        XSize nameSize = gfx.MeasureString(lines[0].ToUpper(), headerFont);
+        double textX = startX + (squareWidth - nameSize.Width) / 2;
+        double textY = startY + (squareHeight - nameSize.Height) / 2; // Kare yüksekliğinin çeyreği kadar aşağıda
+        gfx.DrawString(lines[0].ToUpper(), headerFont, XBrushes.Black, textX, textY);
 
         // İkinci satırı yerleştirin
-        textY += (squareHeight / 3); // Kare yüksekliğinin yarısı kadar daha aşağıda
-        gfx.DrawString(lines[1].ToUpper(), new XFont("Arial", 20), XBrushes.Black, textX, textY, XStringFormats.Center);
+        XFont secondLineFont = null;
+        XSize secondLineSize = new XSize();
+        double secondLineFontSize = 20;
+        do
+        {
+            secondLineFont = new XFont("Arial", secondLineFontSize);
+            secondLineSize = gfx.MeasureString(lines[1].ToUpper(), secondLineFont);
+            secondLineFontSize -= 1; // Font boyutunu küçült
+        } while (secondLineSize.Width > squareWidth && secondLineFontSize >= 10); // Kare içine sığana kadar veya font boyutu minimum 10 olana kadar
+        textY += squareHeight / 3; // Kare yüksekliğinin yarısı kadar daha aşağıda
+        textX = startX + (squareWidth - secondLineSize.Width) / 2;
+        gfx.DrawString(lines[1].ToUpper(), secondLineFont, XBrushes.Black, textX, textY);
+
     }
     private static void DrawSummary(XGraphics gfx, XFont font, string[] lines)
     {
         double rectWidth = 246;
         double rectHeight = 688;
-        double startY = 180 + rectHeight / 15;
+        double startY = 200;
 
+        // "Özet" metnini çizin
+        XSize summaryTextSize = gfx.MeasureString("Özet", new XFont("Arial", 25));
+        double summaryTextX = (rectWidth - summaryTextSize.Width) / 2;
+        gfx.DrawString("Özet", new XFont("Arial", 25), XBrushes.Black, summaryTextX, startY);
+
+        startY += 10;
         // Kareyi çizin
         gfx.DrawRectangle(XPens.Blue, 0, 155, rectWidth, rectHeight);
         // Sınırları çizin
@@ -96,12 +107,8 @@ public class PdfHelper
         XPen dashedPen = new XPen(XColor.FromArgb(40, 27, 20), 3);
         dashedPen.DashStyle = XDashStyle.Dash;
 
-        gfx.DrawLine(dashedPen, 10, 170 + rectHeight / 15, rectWidth - 10, 170 + rectHeight / 15); // Alt çizgi
-
-        // "Özet" metnini çizin
-        XSize summaryTextSize = gfx.MeasureString("Özet", new XFont("Arial", 25));
-        double summaryTextX = (rectWidth - summaryTextSize.Width) / 2;
-        gfx.DrawString("Özet", new XFont("Arial", 25), XBrushes.Black, summaryTextX, 201);
+        // Kesikli çizgiyi çizin
+        gfx.DrawLine(dashedPen, 10, startY, rectWidth - 10, startY); // Alt çizgi
 
         // Metni belirli bir genişlikte wrap yaparak çizin
         XRect summaryRect = new XRect(10, 172 + rectHeight / 15, rectWidth - 20, rectHeight / 3); // Metin sınırları
@@ -142,12 +149,11 @@ public class PdfHelper
         double summaryEndY = currentY + font.GetHeight() + 40;
 
         // İletişim bilgilerini çizin
-        DrawContactInformation(gfx, font, lines, summaryEndY);
+        DrawContactInformation(gfx, font, lines, summaryEndY, rectWidth);
     }
 
-    private static void DrawContactInformation(XGraphics gfx, XFont font, string[] lines, double startY)
+    private static void DrawContactInformation(XGraphics gfx, XFont font, string[] lines, double startY, double rectWidth)
     {
-        double rectWidth = 246;
         double lineHeight = font.GetHeight();
         double iconSpacing = 10; // İkonlar arası boşluk
         double maxTextWidth = 155; // Maksimum metin genişliği
@@ -161,7 +167,7 @@ public class PdfHelper
         XPen dashedPen = new XPen(XColor.FromArgb(40, 27, 20), 3);
         dashedPen.DashStyle = XDashStyle.Dash;
 
-        startY += 20; // Çizginin hemen altına geçmek için
+        startY += 10; // Çizginin hemen altına geçmek için
 
         // Kesikli çizgiyi çizin
         gfx.DrawLine(dashedPen, 10, startY, rectWidth - 10, startY); // Alt çizgi
@@ -237,56 +243,220 @@ public class PdfHelper
             // Bir sonraki satıra geçme
             startY += lineHeight + 10;
         }
+        // İletişim metnin bitiş yüksekliğini döndür
+        double contactEndY = startY + font.GetHeight() + 20;
+
+        //Önemli yetenekleri çizin
+        DrawSkills(gfx, font, lines, contactEndY, rectWidth);
     }
 
 
-    private static void DrawSkills(XGraphics gfx, XFont font, string[] lines)
+    private static void DrawSkills(XGraphics gfx, XFont font, string[] lines, double startY, double rectWidth)
     {
-        double startY = 40;
+        // "Yetenekler" metnini genişliğe göre tam ortala
+        XSize textSize = gfx.MeasureString("Yetenekler", new XFont("Arial", 25));
+        double textX = (rectWidth - textSize.Width) / 2;
+        gfx.DrawString("Yetenekler", new XFont("Arial", 25), XBrushes.Black, textX, startY);
+
+        // Kesikli çizgi çizmek için DashStyle belirleyin
+        XPen dashedPen = new XPen(XColor.FromArgb(40, 27, 20), 3);
+        dashedPen.DashStyle = XDashStyle.Dash;
+
+        startY += 10; // Çizginin hemen altına geçmek için
+
+        // Kesikli çizgiyi çizin
+        gfx.DrawLine(dashedPen, 10, startY, rectWidth - 10, startY); // Alt çizgi
+
         double lineHeight = font.GetHeight();
 
-        gfx.DrawString("Yetenekler", font, XBrushes.Black, 40, startY);
         startY += lineHeight;
 
-        for (int i = 9; i < 12; i++)
+        // Metni wrap ederek çizmek için XTextFormatter kullanın
+        XTextFormatter tf = new XTextFormatter(gfx);
+        XRect rect1 = new XRect(10, startY, rectWidth - 10, gfx.PageSize.Height - startY); // Metnin sığdırılacağı dikdörtgen alan
+        tf.DrawString(lines[8], font, XBrushes.Black, rect1, XStringFormats.TopLeft);
+
+        lineHeight = font.GetHeight();
+
+        startY += lineHeight * 5;
+
+        // "Ek Yetenekler" metnini genişliğe göre tam ortala
+        XSize textSize1 = gfx.MeasureString("Ek Yetenekler", new XFont("Arial", 25));
+        double textX1 = (rectWidth - textSize1.Width) / 2;
+        gfx.DrawString("Ek Yetenekler", new XFont("Arial", 25), XBrushes.Black, textX1, startY);
+        startY += 10;
+        // Kesikli çizgiyi çizin
+        gfx.DrawLine(dashedPen, 10, startY, rectWidth - 10, startY); // Alt çizgi
+
+        startY += 10;
+
+        XRect rect2 = new XRect(10, startY, rectWidth - 10, gfx.PageSize.Height - startY); // Metnin sığdırılacağı dikdörtgen alan
+        tf.DrawString(lines[9], font, XBrushes.Black, rect2, XStringFormats.TopLeft);
+
+        // Yetenekler metnin bitiş yüksekliğini döndür
+        double skillsEndY = startY + font.GetHeight() + 20;
+
+        DrawLanguages(gfx, font, lines, skillsEndY, rectWidth);
+    }
+
+    private static void DrawLanguages(XGraphics gfx, XFont font, string[] lines, double startY, double rectWidth)
+    {
+        startY += font.GetHeight() + 40;
+
+        // "Diller" metnini genişliğe göre tam ortala
+        XSize textSize = gfx.MeasureString("Diller", new XFont("Arial", 25));
+        double textX = (rectWidth - textSize.Width) / 2;
+        gfx.DrawString("Diller", new XFont("Arial", 25), XBrushes.Black, textX, startY);
+
+        // Kesikli çizgi çizmek için DashStyle belirleyin
+        XPen dashedPen = new XPen(XColor.FromArgb(40, 27, 20), 3);
+        dashedPen.DashStyle = XDashStyle.Dash;
+
+        startY += 10; // Çizginin hemen altına geçmek için
+
+        // Kesikli çizgiyi çizin
+        gfx.DrawLine(dashedPen, 10, startY, rectWidth - 10, startY); // Alt çizgi
+
+        startY += 20; // Çizginin hemen altına geçmek için
+
+        // Dilleri alt alta yazdır
+        for (int i = 0; i < lines[10].Split(',').Length; i++)
         {
-            gfx.DrawString(lines[i], font, XBrushes.Black, 40, startY);
-            startY += lineHeight;
+            string language = lines[10].Split(',')[i].Trim();
+            XSize languageSize = gfx.MeasureString(language, font);
+            double languageX = (rectWidth - languageSize.Width) / 2;
+            gfx.DrawString(language, font, XBrushes.Black, languageX, startY);
+            startY += font.GetHeight() + 5; // Bir sonraki satırın altına geç
         }
+
+        // Eğitim bilgileri
+        DrawEducation(gfx, font, lines, 180);
     }
 
-    private static void DrawLanguages(XGraphics gfx, XFont font, string[] lines)
+    private static void DrawEducation(XGraphics gfx, XFont font, string[] lines, double startY)
     {
-        double startY = 40;
-        double lineHeight = font.GetHeight();
+        double rectWidth = 348;
+        double rectHeight = 689;
+        startY = 200;
 
-        gfx.DrawString("Diller", font, XBrushes.Black, 40, startY);
-        startY += lineHeight;
+        // Kareyi çizin
+        gfx.DrawRectangle(XPens.Black, 247, 155, rectWidth, rectHeight);
 
-        gfx.DrawString(lines[12], font, XBrushes.Black, 40, startY);
+        // "Eğitim" metnini genişliğe göre tam ortala
+        XSize textSize = gfx.MeasureString("Eğitim", new XFont("Arial", 25));
+        double textX = 247 + (rectWidth - textSize.Width) / 2;
+        gfx.DrawString("Eğitim", new XFont("Arial", 25), XBrushes.Black, textX, startY);
+
+        // Yumuşak köşeli dikdörtgeni çizmek için DashStyle belirleyin
+        XPen dashedPen = new XPen(XColor.FromArgb(40, 27, 20), 3);
+        dashedPen.DashStyle = XDashStyle.Dash;
+        startY += 10; // Çizginin hemen altına geçmek için
+
+        // Kesikli çizgiyi çizin
+        gfx.DrawLine(dashedPen, 257, startY, 257 + rectWidth - 20, startY); // Alt çizgi
+
+        startY += 20; // Çizginin hemen altına geçmek için
+
+        // Eğitim bilgilerini çizin
+        string[] educationLines = lines[11].Split('\n');
+        double[] lineY = new double[educationLines.Length]; // Satır yüksekliklerini saklamak için dizi
+        double maxWidth = 0; // En geniş satırı saklamak için değişken
+        bool firstLine = true; // İlk satırı işaretlemek için bir bayrak kullanıyoruz
+        for (int i = 0; i < educationLines.Length; i++)
+        {
+            if (!firstLine)
+            {
+                XSize lineSize = gfx.MeasureString(educationLines[i], font);
+                maxWidth = Math.Max(maxWidth, lineSize.Width);
+                lineY[i] = lineSize.Height; // Satırın yüksekliğini sakla
+            }
+            else
+            {
+                double lineX = 247 + (rectWidth - maxWidth) / 2; // Metni tam ortaya hizala
+                gfx.DrawString(educationLines[i], font, XBrushes.Black, lineX, startY);
+                startY += lineY[i]; // Bir sonraki satıra geçmek için
+                firstLine = false; // İlk satırı işaretleme bayrağını kapat
+            }
+        }
+
+        // Eğitim bilgilerini dikdörtgene orantılı olarak çizin
+        for (int i = 1; i < educationLines.Length; i++)
+        {
+            if (!firstLine)
+            {
+                double lineX = 247 + (rectWidth - maxWidth) / 2; // Metni tam ortaya hizala
+                gfx.DrawString(educationLines[i], font, XBrushes.Black, lineX, startY);
+                startY += lineY[i]; // Bir sonraki satıra geçmek için
+
+                if (i % 2 == 0) // Okul adı yazıldıktan sonra
+                {
+                    startY += 15; // Bir satır boşluk bırak
+                }
+            }
+        }
+
+        DrawJobExperience(gfx, font, lines, startY,rectWidth,rectHeight);
     }
 
 
-    private static void DrawEducation(XGraphics gfx, XFont font, string[] lines)
+    private static void DrawJobExperience(XGraphics gfx, XFont font, string[] lines, double startY, double rectWidth,double rectHeight)
     {
-        double startY = 40;
-        double lineHeight = font.GetHeight();
+        startY += 40;
+        // Kareyi çizin
+        gfx.DrawRectangle(XPens.Black, 247, 155, rectWidth, rectHeight);
 
-        gfx.DrawString("Eğitim", font, XBrushes.Black, 40, startY);
-        startY += lineHeight;
+        // "Eğitim" metnini genişliğe göre tam ortala
+        XSize textSize = gfx.MeasureString("İş", new XFont("Arial", 25));
+        double textX = 247 + (rectWidth - textSize.Width) / 2;
+        gfx.DrawString("İş", new XFont("Arial", 25), XBrushes.Black, textX, startY);
 
-        gfx.DrawString(lines[14], font, XBrushes.Black, 40, startY);
-    }
+        // Yumuşak köşeli dikdörtgeni çizmek için DashStyle belirleyin
+        XPen dashedPen = new XPen(XColor.FromArgb(40, 27, 20), 3);
+        dashedPen.DashStyle = XDashStyle.Dash;
+        startY += 10; // Çizginin hemen altına geçmek için
 
-    private static void DrawJobExperience(XGraphics gfx, XFont font, string[] lines)
-    {
-        double startY = 40;
-        double lineHeight = font.GetHeight();
+        // Kesikli çizgiyi çizin
+        gfx.DrawLine(dashedPen, 257, startY, 257 + rectWidth - 20, startY); // Alt çizgi
 
-        gfx.DrawString("Deneyim", font, XBrushes.Black, 40, startY);
-        startY += lineHeight;
+        startY += 20; // Çizginin hemen altına geçmek için
 
-        gfx.DrawString(lines[15], font, XBrushes.Black, 40, startY);
+        // Eğitim bilgilerini çizin
+        string[] jobLines = lines[12].Split('\n');
+        double[] lineY = new double[jobLines.Length]; // Satır yüksekliklerini saklamak için dizi
+        double maxWidth = 0; // En geniş satırı saklamak için değişken
+        bool firstLine = true; // İlk satırı işaretlemek için bir bayrak kullanıyoruz
+        for (int i = 0; i < jobLines.Length; i++)
+        {
+            if (!firstLine)
+            {
+                XSize lineSize = gfx.MeasureString(jobLines[i], font);
+                maxWidth = Math.Max(maxWidth, lineSize.Width);
+                lineY[i] = lineSize.Height; // Satırın yüksekliğini sakla
+            }
+            else
+            {
+                double lineX = 247 + (rectWidth - maxWidth) / 2; // Metni tam ortaya hizala
+                gfx.DrawString(jobLines[i], font, XBrushes.Black, lineX, startY);
+                startY += lineY[i]; // Bir sonraki satıra geçmek için
+                firstLine = false; // İlk satırı işaretleme bayrağını kapat
+            }
+        }
+
+        // Eğitim bilgilerini dikdörtgene orantılı olarak çizin
+        for (int i = 1; i < jobLines.Length; i++)
+        {
+            if (!firstLine)
+            {
+                double lineX = 247 + (rectWidth - maxWidth) / 2; // Metni tam ortaya hizala
+                gfx.DrawString(jobLines[i], font, XBrushes.Black, lineX, startY);
+                startY += lineY[i]; // Bir sonraki satıra geçmek için
+
+                if (i % 2 == 0) // Okul adı yazıldıktan sonra
+                {
+                    startY += 15; // Bir satır boşluk bırak
+                }
+            }
+        }
     }
 
     private static void DrawProjects(XGraphics gfx, XFont font, string[] lines)
@@ -344,10 +514,10 @@ public class PdfHelper
     private static void DrawImage(XGraphics gfx, PdfPage page, string imagePath)
     {
         XImage image = XImage.FromFile(imagePath);
-        double targetWidth = page.Width.Point / 3.65;
+        double targetWidth = page.Width.Point / 3.62;
         double targetHeight = targetWidth + 2.5;
-        double x = page.Width.Point - targetWidth - 7;
-        double y = 13.5;
+        double x = page.Width.Point - targetWidth - 6;
+        double y = 12.8;
 
         XGraphicsPath path = new XGraphicsPath();
         double centerX = x + targetWidth / 6;

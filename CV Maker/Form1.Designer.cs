@@ -104,6 +104,7 @@
             this.languageComboBox = new System.Windows.Forms.ComboBox();
             this.tierComboBox = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.languageDeleteBtn = new System.Windows.Forms.Button();
             this.contactGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -926,12 +927,23 @@
             this.label14.TabIndex = 45;
             this.label14.Text = "Dilin Seviyesini Seçin";
             // 
+            // languageDeleteBtn
+            // 
+            this.languageDeleteBtn.Location = new System.Drawing.Point(108, 548);
+            this.languageDeleteBtn.Name = "languageDeleteBtn";
+            this.languageDeleteBtn.Size = new System.Drawing.Size(93, 33);
+            this.languageDeleteBtn.TabIndex = 46;
+            this.languageDeleteBtn.Text = "Dili Sil";
+            this.languageDeleteBtn.UseVisualStyleBackColor = true;
+            this.languageDeleteBtn.Click += new System.EventHandler(this.languageDeleteBtn_Click);
+            // 
             // BilgiGiris
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1423, 593);
+            this.Controls.Add(this.languageDeleteBtn);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.tierComboBox);
             this.Controls.Add(this.languageComboBox);
@@ -1065,6 +1077,7 @@
         private System.Windows.Forms.CheckBox checkBoxJobExp;
         private System.Windows.Forms.ListBox listBoxEdu;
         private System.Windows.Forms.ListBox listBoxJobExp;
+        private System.Windows.Forms.Button languageDeleteBtn;
     }
 }
 

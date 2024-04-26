@@ -32,6 +32,10 @@ namespace CV_Maker
             string selectedLanguagesAndTier = $"{languageComboBox.SelectedItem} - {tierComboBox.SelectedItem}";
             languageListBox.Items.Add(selectedLanguagesAndTier);
         }
+        private void languageDeleteBtn_Click(object sender, EventArgs e)
+        {
+            languageListBox.Items.RemoveAt(languageListBox.SelectedIndex);
+        }
         public string[] SplitterSkills()
         {
             string[] allSkills = new string[0]; // varsayılan olarak boş bir dizi
@@ -112,7 +116,7 @@ namespace CV_Maker
         }
         private void saveEduBtn_Click(object sender, EventArgs e)
         {
-            string[] educationInfo = new string[4]; // educationInfo dizisi tanımla
+            string[] educationInfo = new string[2]; // educationInfo dizisi tanımla
 
             string schoolName, schoolDepartment, finishPoint, startDate, finishDate;
 
@@ -131,8 +135,8 @@ namespace CV_Maker
                 schoolName = schoolNameTextBox.Text;
                 schoolDepartment = programTextBox.Text;
                 finishPoint = finishPointTextBox.Text;
-                startDate = startTimePicker.Value.ToShortDateString();
-                finishDate = finishTimePicker.Checked ? finishTimePicker.Value.ToShortDateString() : "Devam etmekte";
+                startDate = $"{startTimePicker.Value.Month}.{startTimePicker.Value.Year}";
+                finishDate = finishTimePicker.Checked ? $"{finishTimePicker.Value.Month}.{finishTimePicker.Value.Year}" : "Devam etmekte";
 
                 //Boş bilgileri yokla
                 if (schoolName == "" && schoolDepartment == "" && finishPoint == "")
@@ -161,12 +165,6 @@ namespace CV_Maker
                     return;
                 }
 
-                // Eğitim bilgilerini birleştir ve diziye ekle
-                educationInfo[0] = "Okul Adı: " + schoolName;
-                educationInfo[1] = "Programı: " + schoolDepartment;
-                educationInfo[2] = startDate + " - " + finishDate;
-                educationInfo[3] = "Bitirme Puanı: " + finishPoint;
-
                 // Doğrulama: Eğer başlangıç tarihi bitiş tarihinden büyükse hata mesajı göster
                 if (checkBoxEdu.Checked)
                 {
@@ -176,8 +174,13 @@ namespace CV_Maker
                         return; // Doğrulama başarısız olduğu için işlemi sonlandır
                     }
                 }
+
+                // Eğitim bilgilerini birleştir ve diziye ekle
+                educationInfo[0] = $"{startDate} - {finishDate} {schoolDepartment} - {finishPoint}";
+                educationInfo[1] = schoolName;
+
                 // Eğitim bilgilerini ListBox'a ekle
-                listBoxEdu.Items.AddRange(educationInfo);
+                listBoxEdu.Items.Add($"\n{startDate} - {finishDate} {schoolDepartment} - {finishPoint} \n{schoolName}");
 
                 // GroupBox içindeki metin kutularını temizle
                 ClearTextBoxes(groupBox1);
@@ -185,7 +188,7 @@ namespace CV_Maker
         }
         private void saveJobExpBtn_Click(object sender, EventArgs e)
         {
-            string[] jobInfo = new string[4]; // jobInfo dizisi tanımla
+            string[] jobInfo = new string[2]; // jobInfo dizisi tanımla
 
             string jobName, companyName, positionName, startDate, finishDate;
 
@@ -204,8 +207,8 @@ namespace CV_Maker
                 jobName = jobTextBox.Text;
                 companyName = companyTextBox.Text;
                 positionName = positionTextBox.Text;
-                startDate = jobStartPicker.Value.ToShortDateString();
-                finishDate = jobFinishPicker.Checked ? jobFinishPicker.Value.ToShortDateString() : "Devam etmekte";
+                startDate = $"{jobStartPicker.Value.Month}.{jobStartPicker.Value.Year}";
+                finishDate = jobFinishPicker.Checked ? $"{jobFinishPicker.Value.Month}.{jobFinishPicker.Value.Year}" : "Devam etmekte";
 
                 //Boş bilgileri yokla
                 if (jobName == "" && companyName == "" && positionName == "")
@@ -234,10 +237,8 @@ namespace CV_Maker
                 }
 
                 // İş bilgilerini birleştir ve diziye ekle
-                jobInfo[0] = "İş: " + jobName;
-                jobInfo[1] = "Şirket: " + companyName;
-                jobInfo[2] = "Pozisyon: " + positionName;
-                jobInfo[3] = startDate + " - " + finishDate;
+                jobInfo[0] = $"{startDate} - {finishDate} {jobName} {positionName}";
+                jobInfo[1] = companyName;
 
                 // Doğrulama: Eğer başlangıç tarihi bitiş tarihinden büyükse hata mesajı göster
                 if (checkBoxJobExp.Checked)
@@ -250,7 +251,7 @@ namespace CV_Maker
                 }
 
                 // İş bilgilerini ListBox'a ekle
-                listBoxJobExp.Items.AddRange(jobInfo);
+                listBoxJobExp.Items.Add($"\n{startDate} - {finishDate} {jobName} {positionName} \n{companyName}");
 
                 // GroupBox içindeki metin kutularını temizle
                 ClearTextBoxes(groupBox2);
@@ -364,6 +365,8 @@ namespace CV_Maker
             string name = nameTxtBox.Text;
             string surname = surnameTxtBox.Text;
             string job = jobTxtBox.Text;
+            string skillsImportant = skills1TextBox.Text;
+            string skillsAdditional = skills2TextBox.Text;
             string highSkills = GetCheckedItemsAsString(highSkillsCheckBox);
             string midSkills = GetCheckedItemsAsString(midSkillsCheckBox);
             string lowSkills = GetCheckedItemsAsString(lowSkillsCheckBox);
@@ -398,7 +401,7 @@ namespace CV_Maker
             }
 
             // PDF içeriğini oluştur
-            string[] lines = { name + " " + surname, job,summary ,phone, email, linkdln, github, adress, /*"Yetenekler", "İleri Seviye: " + highSkills, "Orta Seviye: " + midSkills, "Başlangıç Seviye: " + lowSkills, "Diller", string.Join(", ", languages), "Eğitim", string.Join(", ", education), "Deneyim", string.Join(", ", jobExperience)*/ };
+            string[] lines = { name + " " + surname, job, summary, phone, email, linkdln, github, adress, skillsImportant, skillsAdditional, string.Join(", ", languages), string.Join(" ", education), string.Join(", ", jobExperience)/*"Yetenekler", "İleri Seviye: " + highSkills, "Orta Seviye: " + midSkills, "Başlangıç Seviye: " + lowSkills, "Diller", "Eğitim",  "Deneyim", */ };
 
             // 'RichTextBox' içeriğini virgülle bölmek için SplitterRichTextBox fonksiyonunu kullan ve doğrudan 'lines' dizisine ekle
             lines = lines.Concat(SplitterRichTextBox(projectRichTextBox, "Projeler")).ToArray();
@@ -411,7 +414,7 @@ namespace CV_Maker
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PDF Dosyası|*.pdf";
             saveFileDialog.Title = "PDF Kaydet";
-            saveFileDialog.FileName = "CV.pdf"; 
+            saveFileDialog.FileName = "CV.pdf";
             saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads"; // Varsayılan olarak indirilenler klasörü
             saveFileDialog.ShowDialog();
 
