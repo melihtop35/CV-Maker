@@ -50,13 +50,6 @@ namespace CV_Maker
             // Birleştirilmiş dize dizisini döndür
             return allSkills;
         }
-        public string[] SplitterRichTextBox(RichTextBox textBox, string text)
-        {
-            string[] richTextBox = new string[0]; // varsayılan olarak boş bir dizi
-            string combinedText = text + "," + textBox.Text;
-            richTextBox = combinedText.Split(',');
-            return richTextBox;
-        }
         public void FillCheckBoxes()
         {
             string[] allSkills = SplitterSkills(); // Tüm yeteneklerin listesi alınır
@@ -328,7 +321,7 @@ namespace CV_Maker
             string checkedItems = "";
             foreach (var item in checkedListBox.CheckedItems)
             {
-                checkedItems += item.ToString();
+                checkedItems += item.ToString() + ",";
             }
             return checkedItems;
         }
@@ -401,13 +394,7 @@ namespace CV_Maker
             }
 
             // PDF içeriğini oluştur
-            string[] lines = { name + " " + surname, job, summary, phone, email, linkdln, github, adress, skillsImportant, skillsAdditional, string.Join(", ", languages), string.Join(" ", education), string.Join(", ", jobExperience)/*"Yetenekler", "İleri Seviye: " + highSkills, "Orta Seviye: " + midSkills, "Başlangıç Seviye: " + lowSkills, "Diller", "Eğitim",  "Deneyim", */ };
-
-            // 'RichTextBox' içeriğini virgülle bölmek için SplitterRichTextBox fonksiyonunu kullan ve doğrudan 'lines' dizisine ekle
-            lines = lines.Concat(SplitterRichTextBox(projectRichTextBox, "Projeler")).ToArray();
-            lines = lines.Concat(SplitterRichTextBox(certificateRichTextBox, "Sertifikalar")).ToArray();
-            lines = lines.Concat(new string[] { "Hobiler", hobies }).ToArray();
-
+            string[] lines = { name + " " + surname, job, summary, phone, email, linkdln, github, adress, skillsImportant, skillsAdditional, string.Join(", ", languages), string.Join(" ", education), string.Join(", ", jobExperience), project, certificate, highSkills, midSkills, lowSkills, hobies };
 
 
             // Dosya yolunu seç
