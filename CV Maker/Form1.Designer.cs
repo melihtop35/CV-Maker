@@ -65,6 +65,7 @@
             this.projectRichTextBox = new System.Windows.Forms.RichTextBox();
             this.projectTxt = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.deleteEdu = new System.Windows.Forms.Button();
             this.listBoxEdu = new System.Windows.Forms.ListBox();
             this.checkBoxEdu = new System.Windows.Forms.CheckBox();
             this.saveEduBtn = new System.Windows.Forms.Button();
@@ -80,6 +81,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.educationTxt = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.deleteJob = new System.Windows.Forms.Button();
             this.listBoxJobExp = new System.Windows.Forms.ListBox();
             this.checkBoxJobExp = new System.Windows.Forms.CheckBox();
             this.saveJobExpBtn = new System.Windows.Forms.Button();
@@ -453,9 +455,9 @@
             // 
             // certificateRichTextBox
             // 
-            this.certificateRichTextBox.Location = new System.Drawing.Point(857, 373);
+            this.certificateRichTextBox.Location = new System.Drawing.Point(848, 373);
             this.certificateRichTextBox.Name = "certificateRichTextBox";
-            this.certificateRichTextBox.Size = new System.Drawing.Size(140, 211);
+            this.certificateRichTextBox.Size = new System.Drawing.Size(266, 211);
             this.certificateRichTextBox.TabIndex = 28;
             this.certificateRichTextBox.Text = "";
             // 
@@ -464,7 +466,7 @@
             this.ozetTxt.AutoSize = true;
             this.ozetTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.ozetTxt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ozetTxt.Location = new System.Drawing.Point(853, 353);
+            this.ozetTxt.Location = new System.Drawing.Point(844, 353);
             this.ozetTxt.Name = "ozetTxt";
             this.ozetTxt.Size = new System.Drawing.Size(84, 20);
             this.ozetTxt.TabIndex = 25;
@@ -472,9 +474,9 @@
             // 
             // projectRichTextBox
             // 
-            this.projectRichTextBox.Location = new System.Drawing.Point(711, 373);
+            this.projectRichTextBox.Location = new System.Drawing.Point(712, 373);
             this.projectRichTextBox.Name = "projectRichTextBox";
-            this.projectRichTextBox.Size = new System.Drawing.Size(140, 211);
+            this.projectRichTextBox.Size = new System.Drawing.Size(130, 211);
             this.projectRichTextBox.TabIndex = 27;
             this.projectRichTextBox.Text = "";
             // 
@@ -483,7 +485,7 @@
             this.projectTxt.AutoSize = true;
             this.projectTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.projectTxt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.projectTxt.Location = new System.Drawing.Point(708, 353);
+            this.projectTxt.Location = new System.Drawing.Point(709, 353);
             this.projectTxt.Name = "projectTxt";
             this.projectTxt.Size = new System.Drawing.Size(62, 20);
             this.projectTxt.TabIndex = 27;
@@ -492,6 +494,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.groupBox1.Controls.Add(this.deleteEdu);
             this.groupBox1.Controls.Add(this.listBoxEdu);
             this.groupBox1.Controls.Add(this.checkBoxEdu);
             this.groupBox1.Controls.Add(this.saveEduBtn);
@@ -512,6 +515,17 @@
             this.groupBox1.Size = new System.Drawing.Size(292, 318);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
+            // 
+            // deleteEdu
+            // 
+            this.deleteEdu.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.deleteEdu.Location = new System.Drawing.Point(6, 282);
+            this.deleteEdu.Name = "deleteEdu";
+            this.deleteEdu.Size = new System.Drawing.Size(130, 30);
+            this.deleteEdu.TabIndex = 100;
+            this.deleteEdu.Text = "Sil";
+            this.deleteEdu.UseVisualStyleBackColor = true;
+            this.deleteEdu.Click += new System.EventHandler(this.deleteEdu_Click);
             // 
             // listBoxEdu
             // 
@@ -536,9 +550,9 @@
             // saveEduBtn
             // 
             this.saveEduBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.saveEduBtn.Location = new System.Drawing.Point(79, 282);
+            this.saveEduBtn.Location = new System.Drawing.Point(156, 282);
             this.saveEduBtn.Name = "saveEduBtn";
-            this.saveEduBtn.Size = new System.Drawing.Size(150, 30);
+            this.saveEduBtn.Size = new System.Drawing.Size(130, 30);
             this.saveEduBtn.TabIndex = 20;
             this.saveEduBtn.Text = "Kaydet";
             this.saveEduBtn.UseVisualStyleBackColor = true;
@@ -656,6 +670,7 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.groupBox2.Controls.Add(this.deleteJob);
             this.groupBox2.Controls.Add(this.listBoxJobExp);
             this.groupBox2.Controls.Add(this.checkBoxJobExp);
             this.groupBox2.Controls.Add(this.saveJobExpBtn);
@@ -676,6 +691,17 @@
             this.groupBox2.Size = new System.Drawing.Size(291, 318);
             this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
+            // 
+            // deleteJob
+            // 
+            this.deleteJob.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.deleteJob.Location = new System.Drawing.Point(6, 282);
+            this.deleteJob.Name = "deleteJob";
+            this.deleteJob.Size = new System.Drawing.Size(130, 30);
+            this.deleteJob.TabIndex = 99;
+            this.deleteJob.Text = "Sil";
+            this.deleteJob.UseVisualStyleBackColor = true;
+            this.deleteJob.Click += new System.EventHandler(this.deleteJob_Click);
             // 
             // listBoxJobExp
             // 
@@ -700,9 +726,9 @@
             // saveJobExpBtn
             // 
             this.saveJobExpBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.saveJobExpBtn.Location = new System.Drawing.Point(79, 282);
+            this.saveJobExpBtn.Location = new System.Drawing.Point(155, 282);
             this.saveJobExpBtn.Name = "saveJobExpBtn";
-            this.saveJobExpBtn.Size = new System.Drawing.Size(150, 30);
+            this.saveJobExpBtn.Size = new System.Drawing.Size(130, 30);
             this.saveJobExpBtn.TabIndex = 26;
             this.saveJobExpBtn.Text = "Kaydet";
             this.saveJobExpBtn.UseVisualStyleBackColor = true;
@@ -819,10 +845,10 @@
             // 
             // hobiesRichTextBox
             // 
-            this.hobiesRichTextBox.Location = new System.Drawing.Point(1002, 373);
+            this.hobiesRichTextBox.Location = new System.Drawing.Point(1120, 373);
             this.hobiesRichTextBox.Name = "hobiesRichTextBox";
-            this.hobiesRichTextBox.Size = new System.Drawing.Size(165, 211);
-            this.hobiesRichTextBox.TabIndex = 29;
+            this.hobiesRichTextBox.Size = new System.Drawing.Size(130, 211);
+            this.hobiesRichTextBox.TabIndex = 30;
             this.hobiesRichTextBox.Text = "";
             // 
             // label12
@@ -830,7 +856,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label12.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label12.Location = new System.Drawing.Point(998, 353);
+            this.label12.Location = new System.Drawing.Point(1116, 353);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(59, 20);
             this.label12.TabIndex = 33;
@@ -838,9 +864,9 @@
             // 
             // pdfShowcaseBtn
             // 
-            this.pdfShowcaseBtn.Location = new System.Drawing.Point(1310, 548);
+            this.pdfShowcaseBtn.Location = new System.Drawing.Point(1256, 548);
             this.pdfShowcaseBtn.Name = "pdfShowcaseBtn";
-            this.pdfShowcaseBtn.Size = new System.Drawing.Size(101, 36);
+            this.pdfShowcaseBtn.Size = new System.Drawing.Size(134, 36);
             this.pdfShowcaseBtn.TabIndex = 35;
             this.pdfShowcaseBtn.Text = "PDF Önizle";
             this.pdfShowcaseBtn.UseVisualStyleBackColor = true;
@@ -852,9 +878,9 @@
             this.pictureBox.BackgroundImage = global::CV_Maker.Properties.Resources.user_picture;
             this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox.Location = new System.Drawing.Point(1173, 373);
+            this.pictureBox.Location = new System.Drawing.Point(1255, 373);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(135, 210);
+            this.pictureBox.Size = new System.Drawing.Size(135, 169);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 36;
             this.pictureBox.TabStop = false;
@@ -865,7 +891,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label13.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label13.Location = new System.Drawing.Point(1169, 350);
+            this.label13.Location = new System.Drawing.Point(1251, 353);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(98, 20);
             this.label13.TabIndex = 37;
@@ -1078,6 +1104,8 @@
         private System.Windows.Forms.ListBox listBoxEdu;
         private System.Windows.Forms.ListBox listBoxJobExp;
         private System.Windows.Forms.Button languageDeleteBtn;
+        private System.Windows.Forms.Button deleteEdu;
+        private System.Windows.Forms.Button deleteJob;
     }
 }
 

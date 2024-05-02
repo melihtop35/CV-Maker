@@ -2,9 +2,8 @@
 using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
 using System;
+using System.Drawing;
 using System.IO;
-using System.Runtime.Remoting.Messaging;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 public class PdfHelper
 {
@@ -68,7 +67,6 @@ public class PdfHelper
         double squareWidth = 355;
         double squareHeight = 110;
 
-        gfx.DrawRectangle(XPens.Black, startX, startY, squareWidth, squareHeight);
         // Ad soyadı yerleştirin
         XSize nameSize = gfx.MeasureString(lines[0].ToUpper(), headerFont);
         double textX = startX + (squareWidth - nameSize.Width) / 2;
@@ -102,10 +100,6 @@ public class PdfHelper
         gfx.DrawString("Özet", new XFont("Arial", 25), XBrushes.Black, summaryTextX, startY);
 
         startY += 15;
-        // Kareyi çizin
-        gfx.DrawRectangle(XPens.Blue, 0, 155, rectWidth, rectHeight);
-        // Sınırları çizin
-        gfx.DrawRectangle(XPens.Purple, 0, 172 + rectHeight / 15, rectWidth, rectHeight / 3);
 
         // Kesikli çizgi çizmek için DashStyle belirleyin
         XPen dashedPen = new XPen(XColor.FromArgb(40, 27, 20), 3);
@@ -280,8 +274,6 @@ public class PdfHelper
         XRect rect1 = new XRect(10, startY, rectWidth - 10, gfx.PageSize.Height - startY); // Metnin sığdırılacağı dikdörtgen alan
         tf.DrawString(lines[8], font, XBrushes.Black, rect1, XStringFormats.TopLeft);
 
-        lineHeight = font.GetHeight();
-
         startY += lineHeight * 5;
 
         // "Ek Yetenekler" metnini genişliğe göre tam ortala
@@ -340,11 +332,7 @@ public class PdfHelper
     private static void DrawEducation(XGraphics gfx, XFont font, string[] lines, double startY)
     {
         double rectWidth = 348;
-        double rectHeight = 689;
         startY = 200;
-
-        // Kareyi çizin
-        gfx.DrawRectangle(XPens.Black, 247, 155, rectWidth, rectHeight);
 
         // "Eğitim" metnini genişliğe göre tam ortala
         XSize textSize = gfx.MeasureString("Eğitim", new XFont("Arial", 25));
@@ -509,7 +497,7 @@ public class PdfHelper
             currentX += wordSize.Width; // X konumunu güncelle
         }
 
-        startY = currentY + 20; // Yüksekliği en son satırın altına ayarla
+        startY = currentY+10; // Yüksekliği en son satırın altına ayarla
 
         DrawCertificates(gfx, font, lines, startY, rectWidth);
     }
@@ -519,14 +507,18 @@ public class PdfHelper
         startY += 40;
 
         // "Sertifikalar" metnini genişliğe göre tam ortala
-        XSize textSize = gfx.MeasureString("Sertifikalar", new XFont("Arial", 25));
-        double textX = 247 + (rectWidth - textSize.Width) / 2;
+        string certificateLine = lines[14].Trim(); // Projelerin tamamını al, başındaki ve sonundaki boşlukları temizle
+        XSize certificateSize = gfx.MeasureString(certificateLine, font);
+        double textX = 257 + (rectWidth - certificateSize.Width) / 2;
         gfx.DrawString("Sertifikalar", new XFont("Arial", 25), XBrushes.Black, textX, startY);
 
         // Alt çizgi çizmek için DashStyle belirleyin
         XPen dashedPen = new XPen(XColor.FromArgb(40, 27, 20), 3);
         dashedPen.DashStyle = XDashStyle.Dash;
-        startY += 10; // Çizginin hemen altına geçmek için
+        startY += 5; // Çizginin hemen altına geçmek için
+        // Alt çizgi çizmek için DashStyle belirleyin
+        XPen dashedPenGauzy = new XPen(XColor.FromArgb(100, 40, 27, 20), 3);
+        dashedPenGauzy.DashStyle = XDashStyle.Dash;
 
         // Kesikli çizgiyi çizin
         gfx.DrawLine(dashedPen, 257, startY, 257 + rectWidth - 20, startY); // Alt çizgi
@@ -534,33 +526,19 @@ public class PdfHelper
         startY += 20; // Çizginin hemen altına geçmek için
 
         // Sertifikaları çizin
-        string certificateLine = lines[14].Trim(); // Projelerin tamamını al, başındaki ve sonundaki boşlukları temizle
-        XSize projectSize = gfx.MeasureString(certificateLine, font); // Projelerin boyutunu ölç
+        string[] words = certificateLine.Split(','); // Virgüle göre ayır
 
-        double currentX = 257; // Başlangıçta projelerin yazılacağı x konumu
-        double currentY = startY; // Başlangıçta projelerin yazılacağı y konumu
-
-        string[] words = certificateLine.Split(' '); // Projeleri kelimelere ayır
         foreach (string word in words)
         {
-            XSize wordSize = gfx.MeasureString(word + " ", font); // Kelimenin boyutunu ve bir boşluk ekleyin
-            if (currentX + wordSize.Width > 257 + rectWidth - 20) // Taşma kontrolü
-            {
-                currentX = 257; // X konumunu başlangıç noktasına döndür
-                currentY += 15; // Y konumunu bir alt satıra taşı
-            }
-
-            if (currentX > 257) // Eğer bu kelimenin başı değilse virgül ekle
-            {
-                gfx.DrawString(" ", font, XBrushes.Black, currentX, currentY);
-                currentX += gfx.MeasureString(" ", font).Width; // X konumunu güncelle
-            }
-
-            gfx.DrawString(word + " ", font, XBrushes.Black, currentX, currentY); // Kelimeyi yazdır
-            currentX += wordSize.Width; // X konumunu güncelle
+            string trimmedWord = word.Trim(); // Boşlukları temizle
+            XSize wordSize = gfx.MeasureString(trimmedWord, font);
+            double wordX = 257 + (rectWidth - wordSize.Width) / 2;
+            gfx.DrawString(trimmedWord, font, XBrushes.Black, wordX, startY); // Kelimeyi yazdır
+            startY += 5;
+            // Kesikli çizgiyi çizin
+            gfx.DrawLine(dashedPenGauzy, 300, startY, 257 + rectWidth - 60, startY); // Alt çizgi
+            startY += wordSize.Height + 5; // Y konumunu güncelle
         }
-
-        startY = currentY + 20; // Yüksekliği en son satırın altına ayarla
     }
 
     private static void DrawSkillsLevel(XGraphics gfx, XFont font, string[] lines)
@@ -576,6 +554,9 @@ public class PdfHelper
         // Alt çizgi çizmek için DashStyle belirleyin
         XPen dashedPen = new XPen(XColor.FromArgb(40, 27, 20), 3);
         dashedPen.DashStyle = XDashStyle.Dash;
+        // Alt çizgi çizmek için DashStyle belirleyin
+        XPen dashedPenGauzy = new XPen(XColor.FromArgb(100, 40, 27, 20), 3);
+        dashedPenGauzy.DashStyle = XDashStyle.Dash;
 
         // Kesikli çizgiyi çizin
         XRect rect = new XRect(20, startY - 25, rectWidth - 40, 35);
@@ -583,10 +564,18 @@ public class PdfHelper
 
         startY += 40; // Çizginin hemen altına geçmek için
 
-        // Başlık yazdır
+        // Başlık yazdır ve ölçüsünü al
         XSize levelTextSize1 = gfx.MeasureString("İleri Seviye", new XFont("Arial", 20));
+        gfx.DrawLine(dashedPenGauzy, 40, startY + 10, levelTextSize1.Width + 60, startY + 10); // 1. çizgi
+
+        // Başlık yazdır ve ölçüsünü al
         XSize levelTextSize2 = gfx.MeasureString("Orta Seviye", new XFont("Arial", 20));
+        gfx.DrawLine(dashedPenGauzy, levelTextSize1.Width + 140, startY + 10, levelTextSize1.Width + levelTextSize2.Width + 160, startY + 10); // 2. çizgi
+
+        // Başlık yazdır ve ölçüsünü al
         XSize levelTextSize3 = gfx.MeasureString("Temel Seviye", new XFont("Arial", 20));
+        gfx.DrawLine(dashedPenGauzy, levelTextSize1.Width + levelTextSize2.Width + 220, startY + 10, levelTextSize1.Width + levelTextSize2.Width + levelTextSize3.Width + 250, startY + 10); // 3. çizgi
+
 
         double startX1 = (rectWidth / 3 - levelTextSize1.Width) / 2;
         double startX2 = rectWidth / 3 + (rectWidth / 3 - levelTextSize2.Width) / 2;
@@ -596,28 +585,36 @@ public class PdfHelper
         gfx.DrawString("Orta Seviye", new XFont("Arial", 20), XBrushes.Black, startX2, startY);
         gfx.DrawString("Temel Seviye", new XFont("Arial", 20), XBrushes.Black, startX3, startY);
 
-        startY += 30; // Yetenek seviyelerinin altına geçmek için
+        startY += 15; // Yetenek seviyelerinin altına geçmek için
         double textXLeft = 30;
-        double textXMiddle = rectWidth / 3 + (rectWidth / 3-120) / 2;
-        double textXRight = 2 * rectWidth / 3 + (rectWidth / 3-140) / 2;
+        double textXMiddle = rectWidth / 3 + (rectWidth / 3 - 120) / 2;
+        double textXRight = 2 * rectWidth / 3 + (rectWidth / 3 - 140) / 2;
         // Yetenek seviyelerini yazdır
         for (int i = 15; i <= 17; i++)
         {
             string skillLevel = lines[i];
             // İleri seviye
             if (i == 15)
+            {
+                startY += 20;
                 DrawSkillLevel(gfx, font, skillLevel, textXLeft, startY, rectWidth / 3 - 40);
+            }
             // Orta seviye
             else if (i == 16)
+            {
+                startY += 20;
                 DrawSkillLevel(gfx, font, skillLevel, textXMiddle, startY, rectWidth / 3 - 40);
-            // Başlangıç seviyesi
+            }            // Başlangıç seviyesi
             else if (i == 17)
+            {
+                startY += 20;
                 DrawSkillLevel(gfx, font, skillLevel, textXRight, startY, rectWidth / 3 - 40);
+            }
         }
 
-        startY += 80;
+        startY += 120;
 
-        DrawHobbies(gfx, font, lines, startY, rectWidth);
+        DrawSkillsStar(gfx, font, lines, startY, rectWidth);
     }
 
     private static double DrawSkillLevel(XGraphics gfx, XFont font, string skillLevel, double textX, double startY, double maxWidth)
@@ -654,16 +651,15 @@ public class PdfHelper
 
         return currentY;
     }
-
-
-
-
-    private static void DrawHobbies(XGraphics gfx, XFont font, string[] lines, double startY, double rectWidth)
+    private static void DrawSkillsStar(XGraphics gfx, XFont font, string[] lines, double startY, double rectWidth)
     {
-        // "Hobiler" metnini genişliğe göre tam ortala
-        XSize textSize = gfx.MeasureString("Hobiler", new XFont("Arial", 25));
-        double textX = (rectWidth - textSize.Width) / 2;
-        gfx.DrawString("Hobiler", new XFont("Arial", 25), XBrushes.Black, textX, startY);
+        // Yetenek isimlerini birleştir
+        string skillName = lines[8] + "," + lines[9];
+
+        // Metni genişliğe göre tam ortala
+        XSize titleSize = gfx.MeasureString("Yetenek Puanları", new XFont("Arial", 25));
+        double titleX = (rectWidth - titleSize.Width) / 2;
+        gfx.DrawString("Yetenek Puanları", new XFont("Arial", 25), XBrushes.Black, titleX, startY);
 
         // Alt çizgi çizmek için DashStyle belirleyin
         XPen dashedPen = new XPen(XColor.FromArgb(40, 27, 20), 3);
@@ -673,12 +669,111 @@ public class PdfHelper
         XRect rect = new XRect(20, startY - 25, rectWidth - 40, 35);
         gfx.DrawRoundedRectangle(dashedPen, rect, new XSize(10, 10)); // Yumuşak köşeli dikdörtgen çiz
 
-        startY += 40; // Çizginin hemen altına geçmek için
+        double currentX = 40; // Başlangıçta yazılacağı x konumu
 
-        // Yetenek seviyelerini yazdır
-        gfx.DrawString(lines[18], font, XBrushes.Black, 40, startY);
+        // Yetenek adını ve puanını çizdir
+        string[] skillNames = skillName.Trim().Split(',');
+        for (int i = 0; i < skillNames.Length; i++)
+        {
+            if (i % 3 == 0)
+            {
+                startY += 50;
+                currentX = 40;
+            }
+            gfx.DrawString(skillNames[i].Trim(), new XFont("Arial", 12), XBrushes.Black, currentX, startY);
+
+            // Yıldızları yerine koymak için StarReplacer fonksiyonunu çağır
+            StarReplacer(Convert.ToInt32(lines[18][i].ToString()), gfx, currentX, startY + 10);
+
+            currentX += 200; // İleriye kaydır
+        }
+        startY += 70;
+        DrawHobbies(gfx, font, lines, startY, rectWidth);
     }
 
+    private static void StarReplacer(int index, XGraphics gfx, double x, double y)
+    {
+        string imagePath = "C:\\Users\\melih\\OneDrive\\Belgeler\\Visual Studio 2022\\Code Snippets\\Visual C#\\My Code Snippets\\CV Maker\\CV Maker\\Backgrounds\\star.png"; // Star resminin yolunu belirt
+        XImage starImage = XImage.FromFile(imagePath);
+
+        switch (index)
+        {
+            case 1:
+                gfx.DrawImage(starImage, x, y, 15, 15);
+                break;
+            case 2:
+                gfx.DrawImage(starImage, x, y, 15, 15);
+                gfx.DrawImage(starImage, x+=15, y, 15, 15);
+                break;
+            case 3:
+                gfx.DrawImage(starImage, x, y, 15, 15);
+                gfx.DrawImage(starImage, x += 15, y, 15, 15);
+                gfx.DrawImage(starImage, x += 15, y, 15, 15);
+                break;
+            case 4:
+                gfx.DrawImage(starImage, x, y, 15, 15);
+                gfx.DrawImage(starImage, x += 15, y, 15, 15);
+                gfx.DrawImage(starImage, x += 15, y, 15, 15);
+                gfx.DrawImage(starImage, x += 15, y, 15, 15);
+                break;
+            case 5:
+                gfx.DrawImage(starImage, x, y, 15, 15);
+                gfx.DrawImage(starImage, x += 15, y, 15, 15);
+                gfx.DrawImage(starImage, x += 15, y, 15, 15);
+                gfx.DrawImage(starImage, x += 15, y, 15, 15);
+                gfx.DrawImage(starImage, x += 15, y, 15, 15);
+                break;
+            default:
+                break;
+        }
+    }
+
+
+
+    private static void DrawHobbies(XGraphics gfx, XFont font, string[] lines, double startY, double rectWidth)
+    {
+        // "Hobiler" metnini genişliğe göre tam ortala
+        XSize titleSize = gfx.MeasureString("Hobiler", new XFont("Arial", 25));
+        double titleX = (rectWidth - titleSize.Width) / 2;
+        gfx.DrawString("Hobiler", new XFont("Arial", 25), XBrushes.Black, titleX, startY);
+
+        // Alt çizgi çizmek için DashStyle belirleyin
+        XPen dashedPen = new XPen(XColor.FromArgb(40, 27, 20), 3);
+        dashedPen.DashStyle = XDashStyle.Dash;
+
+        // Kesikli çizgiyi çizin
+        XRect rect = new XRect(20, startY - 25, rectWidth - 40, 35);
+        gfx.DrawRoundedRectangle(dashedPen, rect, new XSize(10, 10)); // Yumuşak köşeli dikdörtgen çiz
+
+        startY += 40; // Başlığın hemen altına geçmek için
+
+        // Hobileri yazdır
+        string hobbiesLine = lines[19].Trim(); // Hobileri al, başındaki ve sonundaki boşlukları temizle
+        XSize hobbiesSize = gfx.MeasureString(hobbiesLine, font); // Hobilerin boyutunu ölç
+
+        double currentX = 40; // Başlangıçta hobilerin yazılacağı x konumu
+        double currentY = startY; // Başlangıçta hobilerin yazılacağı y konumu
+
+        string[] words = hobbiesLine.Split(' '); // Hobileri kelimelere ayır
+        foreach (string word in words)
+        {
+            XSize wordSize = gfx.MeasureString(word + " ", font); // Kelimenin boyutunu ve bir boşluk ekleyin
+            if (currentX + wordSize.Width > rectWidth - 40) // Taşma kontrolü
+            {
+                currentX = 40; // X konumunu başlangıç noktasına döndür
+                currentY += 20; // Y konumunu bir alt satıra taşı
+            }
+
+            if (currentX > 40) // Eğer bu kelimenin başı değilse bir boşluk ekle
+            {
+                gfx.DrawString(" ", font, XBrushes.Black, currentX, currentY);
+                currentX += gfx.MeasureString(" ", font).Width; // X konumunu güncelle
+            }
+
+            gfx.DrawString(word + " ", font, XBrushes.Black, currentX, currentY); // Kelimeyi yazdır
+            currentX += wordSize.Width; // X konumunu güncelle
+        }
+    }
 
     private static void DrawImage(XGraphics gfx, PdfPage page, string imagePath)
     {

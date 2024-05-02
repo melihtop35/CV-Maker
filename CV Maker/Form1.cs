@@ -17,9 +17,20 @@ namespace CV_Maker
             InitializeTextBox(skills1TextBox);
             InitializeTextBox(skills2TextBox);
             InitializeRichTextBox(projectRichTextBox);
-            InitializeRichTextBox(certificateRichTextBox);
+            InitializeRichTextBoxCertificate(certificateRichTextBox);
             InitializeRichTextBox(hobiesRichTextBox);
         }
+        // BilgiGiris sınıfında
+        public string Skills1Text
+        {
+            get { return skills1TextBox.Text; }
+        }
+
+        public string Skills2Text
+        {
+            get { return skills2TextBox.Text; }
+        }
+
         private void BilgiGiris_Load(object sender, EventArgs e)
         {
             foreach (CultureInfo culture in CultureInfo.GetCultures(CultureTypes.NeutralCultures))
@@ -50,6 +61,8 @@ namespace CV_Maker
             // Birleştirilmiş dize dizisini döndür
             return allSkills;
         }
+        private int totalCheckedSkills = 0; // Toplam işaretlenmiş yetenek sayısı
+
         public void FillCheckBoxes()
         {
             string[] allSkills = SplitterSkills(); // Tüm yeteneklerin listesi alınır
@@ -60,9 +73,9 @@ namespace CV_Maker
 
             foreach (string skill in allSkills)
             {
-                highSkillsCheckBox.Items.Add(skill); // Yüksek seviyedeki işaret kutusuna yetenek eklenir
-                midSkillsCheckBox.Items.Add(skill); // Orta seviyedeki işaret kutusuna yetenek eklenir
-                lowSkillsCheckBox.Items.Add(skill); // Düşük seviyedeki işaret kutusuna yetenek eklenir
+                highSkillsCheckBox.Items.Add(skill.Trim()); // Yüksek seviyedeki işaret kutusuna yetenek eklenir
+                midSkillsCheckBox.Items.Add(skill.Trim()); // Orta seviyedeki işaret kutusuna yetenek eklenir
+                lowSkillsCheckBox.Items.Add(skill.Trim()); // Düşük seviyedeki işaret kutusuna yetenek eklenir
             }
 
             // İşaret kutularının kontrol değişim olaylarına olay dinleyicisi eklenir
@@ -70,11 +83,25 @@ namespace CV_Maker
             midSkillsCheckBox.ItemCheck += CheckBox_ItemCheck;
             lowSkillsCheckBox.ItemCheck += CheckBox_ItemCheck;
         }
+
         private void CheckBox_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             CheckedListBox checkBox = (CheckedListBox)sender; // Olayı tetikleyen işaret kutusu alınır
 
-            if (e.NewValue == CheckState.Checked) // Yeni işaret durumu "işaretlenmiş" ise
+            if (e.NewValue == CheckState.Checked && e.CurrentValue != CheckState.Checked) // Yeni işaret durumu "işaretlenmiş" ise ve önceki durumu "işaretlenmemiş" ise
+            {
+                totalCheckedSkills++; // Toplam işaretlenmiş yetenek sayısını arttır
+                if (totalCheckedSkills == (highSkillsCheckBox.Items.Count)*2) // Eğer tüm yetenekler işaretlendi ise
+                {
+                    OpenNewForm(); // Yeni form aç
+                }
+            }
+            else if (e.NewValue != CheckState.Checked && e.CurrentValue == CheckState.Checked) // Yeni işaret durumu "işaretlenmemiş" ise ve önceki durumu "işaretlenmiş" ise
+            {
+                --totalCheckedSkills; // Toplam işaretlenmiş yetenek sayısını azalt
+            }
+
+            if (e.NewValue == CheckState.Checked) // Eğer yeni işaret durumu "işaretlenmiş" ise
             {
                 // İşaretlenen öğe alınır
                 string checkedItem = checkBox.Items[e.Index].ToString();
@@ -94,6 +121,13 @@ namespace CV_Maker
                 }
             }
         }
+
+        private void OpenNewForm()
+        {
+            Form2 form2 =new Form2();
+            form2.Show();
+        }
+
         private void UncheckItemInOtherCheckBoxes(string item, params CheckedListBox[] checkBoxes)
         {
             foreach (CheckedListBox checkBox in checkBoxes)
@@ -107,6 +141,7 @@ namespace CV_Maker
                 }
             }
         }
+
         private void saveEduBtn_Click(object sender, EventArgs e)
         {
             string[] educationInfo = new string[2]; // educationInfo dizisi tanımla
@@ -284,10 +319,29 @@ namespace CV_Maker
                 textBox.Leave += TextBox_LeaveForRichText;
             }
         }
+        private void InitializeRichTextBoxCertificate(Control textBox)
+        {
+            if (textBox is TextBox || textBox is RichTextBox)
+            {
+                textBox.ForeColor = Color.Gray;
+                textBox.Text = "'Alınma Tarihi' - 'Sertifika Adı' Şeklinde Yazınız";
+                textBox.Enter += TextBox_EnterCertificate;
+                textBox.Leave += TextBox_LeaveForRichTextCertificate;
+            }
+        }
         private void TextBox_Enter(object sender, EventArgs e)
         {
             Control textBox = (Control)sender;
             if (textBox.Text == "Yazarken aralarına virgül bırakın!")
+            {
+                textBox.Text = "";
+                textBox.ForeColor = SystemColors.WindowText;
+            }
+        }
+        private void TextBox_EnterCertificate(object sender, EventArgs e)
+        {
+            Control textBox = (Control)sender;
+            if (textBox.Text == "'Alınma Tarihi' - 'Sertifika Adı' Şeklinde Yazınız")
             {
                 textBox.Text = "";
                 textBox.ForeColor = SystemColors.WindowText;
@@ -301,10 +355,19 @@ namespace CV_Maker
                 textBox.Text = "Yazarken aralarına virgül bırakın!";
                 textBox.ForeColor = Color.Gray;
             }
-            if (!textBox.Text.Contains("Yazarken aralarına virgül bırakın!"))
+            if (!textBox.Text.Contains("Yazarken aralarına virgül bırakın"))
             {
                 SplitterSkills();
                 FillCheckBoxes();
+            }
+        }
+        private void TextBox_LeaveForRichTextCertificate(object sender, EventArgs e)
+        {
+            Control textBox = (Control)sender;
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                textBox.Text = "'Alınma Tarihi' - 'Sertifika Adı' Şeklinde Yazınız";
+                textBox.ForeColor = Color.Gray;
             }
         }
         private void TextBox_LeaveForRichText(object sender, EventArgs e)
@@ -350,8 +413,8 @@ namespace CV_Maker
                 pictureBox.Image = new Bitmap(selectedImagePath);
             }
         }
-
-
+        // SkillStar'ı List<int> olarak tanımla
+        public List<int> skillsStar = new List<int>();
         private void pdfShowcaseBtn_Click(object sender, EventArgs e)
         {
             // Formdaki bilgileri al
@@ -394,7 +457,7 @@ namespace CV_Maker
             }
 
             // PDF içeriğini oluştur
-            string[] lines = { name + " " + surname, job, summary, phone, email, linkdln, github, adress, skillsImportant, skillsAdditional, string.Join(", ", languages), string.Join(" ", education), string.Join(", ", jobExperience), project, certificate, highSkills, midSkills, lowSkills, hobies };
+            string[] lines = { name + " " + surname, job, summary, phone, email, linkdln, github, adress, skillsImportant, skillsAdditional, string.Join(", ", languages), string.Join(" ", education), string.Join(", ", jobExperience), project, certificate, highSkills, midSkills, lowSkills, string.Join("", skillsStar), hobies };
 
 
             // Dosya yolunu seç
@@ -422,6 +485,24 @@ namespace CV_Maker
                 //MessageBox.Show("PDF dosyası oluşturuldu: " + outputPath);
             }
             BilgiGiris.ActiveForm.Close();
+        }
+
+        private void deleteEdu_Click(object sender, EventArgs e)
+        {
+            listBoxEdu.Items.RemoveAt(listBoxEdu.SelectedIndex);
+        }
+
+        private void deleteJob_Click(object sender, EventArgs e)
+        {
+            listBoxJobExp.Items.RemoveAt(listBoxJobExp.SelectedIndex);
+        }
+
+        // UpdateSkills yöntemi
+        public void UpdateSkills(List<int> trackBarValues)
+        {
+            // skillsStar koleksiyonunu güncelle
+            skillsStar.Clear();
+            skillsStar.AddRange(trackBarValues);
         }
     }
 }
