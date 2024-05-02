@@ -70,7 +70,7 @@ namespace CV_Maker
             }
 
             // TrackBar ve etiketlerin son konumunu baz alarak formun genişliğini ve yüksekliğini ayarla
-            int newWidth = 400; // En az bir minimum genişlik olmalı
+            int newWidth = 800; // En az bir minimum genişlik olmalı
             int newHeight = yPos + 100; // Son TrackBar'ın bulunduğu satırın sonuna ek bir boşluk
 
             Size = new Size(newWidth, newHeight); // Formun yeni boyutunu ayarla

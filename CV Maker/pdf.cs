@@ -589,6 +589,7 @@ public class PdfHelper
         double textXLeft = 30;
         double textXMiddle = rectWidth / 3 + (rectWidth / 3 - 120) / 2;
         double textXRight = 2 * rectWidth / 3 + (rectWidth / 3 - 140) / 2;
+        startY += 20;
         // Yetenek seviyelerini yazdır
         for (int i = 15; i <= 17; i++)
         {
@@ -596,19 +597,16 @@ public class PdfHelper
             // İleri seviye
             if (i == 15)
             {
-                startY += 20;
                 DrawSkillLevel(gfx, font, skillLevel, textXLeft, startY, rectWidth / 3 - 40);
             }
             // Orta seviye
             else if (i == 16)
             {
-                startY += 20;
-                DrawSkillLevel(gfx, font, skillLevel, textXMiddle, startY, rectWidth / 3 - 40);
+                DrawSkillLevel(gfx, font, skillLevel, textXMiddle, startY, rectWidth / 3 - 100);
             }            // Başlangıç seviyesi
             else if (i == 17)
             {
-                startY += 20;
-                DrawSkillLevel(gfx, font, skillLevel, textXRight, startY, rectWidth / 3 - 40);
+                DrawSkillLevel(gfx, font, skillLevel, textXRight, startY, rectWidth / 3 - 80);
             }
         }
 

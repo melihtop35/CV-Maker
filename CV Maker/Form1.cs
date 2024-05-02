@@ -484,7 +484,6 @@ namespace CV_Maker
 
                 //MessageBox.Show("PDF dosyası oluşturuldu: " + outputPath);
             }
-            BilgiGiris.ActiveForm.Close();
         }
 
         private void deleteEdu_Click(object sender, EventArgs e)
