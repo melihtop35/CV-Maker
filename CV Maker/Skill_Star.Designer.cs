@@ -1,6 +1,6 @@
 ﻿namespace CV_Maker
 {
-    partial class Form2
+    partial class Skill_Star
     {
         /// <summary>
         /// Required designer variable.
@@ -35,9 +35,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "Form2";
-            this.Text = "Form2";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
+            this.Name = "Skill_Star";
+            this.Text = "Skill_Star";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Skill_Star_FormClosed);
             this.ResumeLayout(false);
 
         }

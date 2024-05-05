@@ -617,7 +617,7 @@ public class PdfHelper
 
     private static double DrawSkillLevel(XGraphics gfx, XFont font, string skillLevel, double textX, double startY, double maxWidth)
     {
-        string[] words = skillLevel.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] words = skillLevel.Split(',');
         double currentY = startY;
         string line = "";
 

@@ -7,12 +7,12 @@ using System.Collections.Generic;
 
 namespace CV_Maker
 {
-    public partial class Form2 : Form
+    public partial class Skill_Star : Form
     {
         // TrackBar değerlerini saklamak için bir dizi
         private List<int> trackBarValues;
 
-        public Form2()
+        public Skill_Star()
         {
             InitializeComponent();
             InitializeTrackBars();
@@ -76,7 +76,7 @@ namespace CV_Maker
             Size = new Size(newWidth, newHeight); // Formun yeni boyutunu ayarla
         }
 
-        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        private void Skill_Star_FormClosed(object sender, FormClosedEventArgs e)
         {
             // Form1'e TrackBar değerlerini gönder
             BilgiGiris form1 = (BilgiGiris)Application.OpenForms["BilgiGiris"];
