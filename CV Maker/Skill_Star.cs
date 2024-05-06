@@ -19,60 +19,67 @@ namespace CV_Maker
 
         private void InitializeTrackBars()
         {
-            string[] skills = GetSkillsFromForm1(); // Form1'den yetenekleri al
-
-            int xPos = 40; // TrackBar'ların başlangıç X konumu
-            int yPos = 20; // TrackBar'ların başlangıç Y konumu
-            int count = 0; // Sayaç
-
-            // TrackBar değerlerini saklamak için dizi oluştur
-            trackBarValues = new List<int>();
-
-            // Her yetenek için bir TrackBar oluştur
-            foreach (string skill in skills)
+            try
             {
-                TrackBar trackBar = new TrackBar();
-                trackBar.Minimum = 1; // Minimum değer 1
-                trackBar.Maximum = 5; // Maksimum değer 5
-                trackBar.Value = 1; // Varsayılan değer 1
-                trackBar.Orientation = Orientation.Horizontal; // Yatay yönde oluştur
-                trackBar.AutoSize = true; // Otomatik boyutlandırma
-                trackBar.Location = new Point(xPos, yPos + 20); // Konum belirlenir
-                Controls.Add(trackBar); // Forma eklenir
+                string[] skills = GetSkillsFromForm1(); // Form1'den yetenekleri al
 
-                // TrackBar'ın değerini sakla
-                trackBarValues.Add(trackBar.Value);
+                int xPos = 40; // TrackBar'ların başlangıç X konumu
+                int yPos = 20; // TrackBar'ların başlangıç Y konumu
+                int count = 0; // Sayaç
 
-                // TrackBar'ın ValueChanged olayına olay işleyici ekle
-                trackBar.ValueChanged += (sender, e) =>
+                // TrackBar değerlerini saklamak için dizi oluştur
+                trackBarValues = new List<int>();
+
+                // Her yetenek için bir TrackBar oluştur
+                foreach (string skill in skills)
                 {
-                    TrackBar changedTrackBar = sender as TrackBar;
-                    int index = Array.IndexOf(Controls.OfType<TrackBar>().ToArray(), changedTrackBar);
-                    trackBarValues[index] = changedTrackBar.Value;
-                };
+                    TrackBar trackBar = new TrackBar();
+                    trackBar.Minimum = 1; // Minimum değer 1
+                    trackBar.Maximum = 5; // Maksimum değer 5
+                    trackBar.Value = 1; // Varsayılan değer 1
+                    trackBar.Orientation = Orientation.Horizontal; // Yatay yönde oluştur
+                    trackBar.AutoSize = true; // Otomatik boyutlandırma
+                    trackBar.Location = new Point(xPos, yPos + 20); // Konum belirlenir
+                    Controls.Add(trackBar); // Forma eklenir
 
-                Label label = new Label();
-                label.Text = skill; // Yetenek adı atanır
-                label.Location = new Point(xPos, yPos); // Konum belirlenir
-                Controls.Add(label); // Forma eklenir
+                    // TrackBar'ın değerini sakla
+                    trackBarValues.Add(trackBar.Value);
 
-                // X konumunu ve sayaç değerini güncelle
-                xPos += trackBar.Width + 50;
-                count++;
+                    // TrackBar'ın ValueChanged olayına olay işleyici ekle
+                    trackBar.ValueChanged += (sender, e) =>
+                    {
+                        TrackBar changedTrackBar = sender as TrackBar;
+                        int index = Array.IndexOf(Controls.OfType<TrackBar>().ToArray(), changedTrackBar);
+                        trackBarValues[index] = changedTrackBar.Value;
+                    };
 
-                // Eğer TrackBar'lar formun genişliğini aşarsa yeni satıra geç
-                if (xPos + trackBar.Width > Width)
-                {
-                    xPos = 40; // X konumunu sıfırla
-                    yPos += 80; // Y konumunu bir sonraki satıra kaydır
+                    Label label = new Label();
+                    label.Text = skill; // Yetenek adı atanır
+                    label.Location = new Point(xPos, yPos); // Konum belirlenir
+                    Controls.Add(label); // Forma eklenir
+
+                    // X konumunu ve sayaç değerini güncelle
+                    xPos += trackBar.Width + 50;
+                    count++;
+
+                    // Eğer TrackBar'lar formun genişliğini aşarsa yeni satıra geç
+                    if (xPos + trackBar.Width > Width)
+                    {
+                        xPos = 40; // X konumunu sıfırla
+                        yPos += 80; // Y konumunu bir sonraki satıra kaydır
+                    }
                 }
+
+                // TrackBar ve etiketlerin son konumunu baz alarak formun genişliğini ve yüksekliğini ayarla
+                int newWidth = 800; // En az bir minimum genişlik olmalı
+                int newHeight = yPos + 100; // Son TrackBar'ın bulunduğu satırın sonuna ek bir boşluk
+
+                Size = new Size(newWidth, newHeight); // Formun yeni boyutunu ayarla
             }
-
-            // TrackBar ve etiketlerin son konumunu baz alarak formun genişliğini ve yüksekliğini ayarla
-            int newWidth = 800; // En az bir minimum genişlik olmalı
-            int newHeight = yPos + 100; // Son TrackBar'ın bulunduğu satırın sonuna ek bir boşluk
-
-            Size = new Size(newWidth, newHeight); // Formun yeni boyutunu ayarla
+            catch
+            {
+                return;
+            }
         }
 
         private void Skill_Star_FormClosed(object sender, FormClosedEventArgs e)

@@ -3,13 +3,15 @@ using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
 using System;
 using System.IO;
+using System.Windows.Forms;
 
 public class PdfHelper
 {
     public static void CreatePdf(string outputPath, string[] lines, string imagePath = null)
     {
-        string backgroundImagePath = "C:\\Users\\melih\\OneDrive\\Belgeler\\Visual Studio 2022\\Code Snippets\\Visual C#\\My Code Snippets\\CV Maker\\CV Maker\\Backgrounds\\canvaBack.png";
-        string backgroundImagePathSecond = "C:\\Users\\melih\\OneDrive\\Belgeler\\Visual Studio 2022\\Code Snippets\\Visual C#\\My Code Snippets\\CV Maker\\CV Maker\\Backgrounds\\secondPage.png";
+        string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+        string backgroundImagePath = Path.Combine(projectDirectory, "Backgrounds", "canvaBack.png");
+        string backgroundImagePathSecond = Path.Combine(projectDirectory, "Backgrounds", "secondPage.png");
 
         PdfDocument document = new PdfDocument();
 
@@ -681,9 +683,15 @@ public class PdfHelper
             }
             gfx.DrawString(skillNames[i].Trim(), new XFont("Arial", 12), XBrushes.Black, currentX, startY);
 
-            // Yıldızları yerine koymak için StarReplacer fonksiyonunu çağır
-            StarReplacer(Convert.ToInt32(lines[18][i].ToString()), gfx, currentX, startY + 10);
-
+            try
+            {
+                // Yıldızları yerine koymak için StarReplacer fonksiyonunu çağır
+                StarReplacer(Convert.ToInt32(lines[18][i].ToString()), gfx, currentX, startY + 10);
+            }
+            catch
+            {
+                return;
+            }
             currentX += 200; // İleriye kaydır
         }
         startY += 70;
@@ -692,7 +700,8 @@ public class PdfHelper
 
     private static void StarReplacer(int index, XGraphics gfx, double x, double y)
     {
-        string imagePath = "C:\\Users\\melih\\OneDrive\\Belgeler\\Visual Studio 2022\\Code Snippets\\Visual C#\\My Code Snippets\\CV Maker\\CV Maker\\Backgrounds\\star.png"; // Star resminin yolunu belirt
+        string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+        string imagePath = Path.Combine(projectDirectory, "Backgrounds", "star.png");
         XImage starImage = XImage.FromFile(imagePath);
 
         switch (index)
