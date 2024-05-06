@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
 
 
@@ -124,8 +123,8 @@ namespace CV_Maker
 
         private void OpenNewForm()
         {
-            Form2 form2 =new Form2();
-            form2.Show();
+            Skill_Star skill_Star =new Skill_Star();
+            skill_Star.Show();
         }
 
         private void UncheckItemInOtherCheckBoxes(string item, params CheckedListBox[] checkBoxes)

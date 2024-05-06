@@ -2,7 +2,6 @@
 using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
 using System;
-using System.Drawing;
 using System.IO;
 
 public class PdfHelper
@@ -472,7 +471,6 @@ public class PdfHelper
 
         // Projeleri çizin
         string projectLine = lines[13].Trim(); // Projelerin tamamını al, başındaki ve sonundaki boşlukları temizle
-        XSize projectSize = gfx.MeasureString(projectLine, font); // Projelerin boyutunu ölç
 
         double currentX = 257; // Başlangıçta projelerin yazılacağı x konumu
         double currentY = startY; // Başlangıçta projelerin yazılacağı y konumu
@@ -587,8 +585,8 @@ public class PdfHelper
 
         startY += 15; // Yetenek seviyelerinin altına geçmek için
         double textXLeft = 30;
-        double textXMiddle = rectWidth / 3 + (rectWidth / 3 - 120) / 2;
-        double textXRight = 2 * rectWidth / 3 + (rectWidth / 3 - 140) / 2;
+        double textXMiddle = rectWidth / 3 + (rectWidth / 3 - 150) / 2;
+        double textXRight = 2 * rectWidth / 3 + (rectWidth / 3 - 160) / 2;
         startY += 20;
         // Yetenek seviyelerini yazdır
         for (int i = 15; i <= 17; i++)
@@ -602,11 +600,12 @@ public class PdfHelper
             // Orta seviye
             else if (i == 16)
             {
-                DrawSkillLevel(gfx, font, skillLevel, textXMiddle, startY, rectWidth / 3 - 100);
-            }            // Başlangıç seviyesi
+                DrawSkillLevel(gfx, font, skillLevel, textXMiddle, startY, rectWidth / 3 - 20);
+            }            
+            // Başlangıç seviyesi
             else if (i == 17)
             {
-                DrawSkillLevel(gfx, font, skillLevel, textXRight, startY, rectWidth / 3 - 80);
+                DrawSkillLevel(gfx, font, skillLevel, textXRight, startY, rectWidth / 3 - 20);
             }
         }
 
@@ -617,7 +616,8 @@ public class PdfHelper
 
     private static double DrawSkillLevel(XGraphics gfx, XFont font, string skillLevel, double textX, double startY, double maxWidth)
     {
-        string[] words = skillLevel.Split(',');
+        // Virgül ile ayrılmış kelimeleri alma
+        string[] words = skillLevel.Replace(",", ", ").Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         double currentY = startY;
         string line = "";
 
@@ -629,26 +629,27 @@ public class PdfHelper
 
             if (size.Width < maxWidth)
             {
-                line = testLine + ", ";
+                line = testLine + " "; // Boşluklu hali
             }
             else
             {
-                gfx.DrawString(line.TrimEnd(',', ' '), font, XBrushes.Black, textX, currentY);
+                gfx.DrawString(line.Trim(), font, XBrushes.Black, textX, currentY); // Son virgülü kaldır
                 currentY += font.Height;
-                line = trimmedWord + ", "; // Yeni satır için kelimeyi ve virgülü ekle
+                line = trimmedWord + " "; // Yeni satır için kelimeyi ve boşluğu ekle
             }
         }
 
         // Son kalan satırı çiz
-        string lastLine = line.TrimEnd(',', ' ');
-        if (!string.IsNullOrEmpty(lastLine))
+        if (!string.IsNullOrEmpty(line))
         {
-            gfx.DrawString(lastLine, font, XBrushes.Black, textX, currentY);
+            gfx.DrawString(line.TrimEnd(' ',','), font, XBrushes.Black, textX, currentY);
             currentY += font.Height;
         }
 
         return currentY;
     }
+
+
     private static void DrawSkillsStar(XGraphics gfx, XFont font, string[] lines, double startY, double rectWidth)
     {
         // Yetenek isimlerini birleştir
@@ -725,9 +726,6 @@ public class PdfHelper
                 break;
         }
     }
-
-
-
     private static void DrawHobbies(XGraphics gfx, XFont font, string[] lines, double startY, double rectWidth)
     {
         // "Hobiler" metnini genişliğe göre tam ortala

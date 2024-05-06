@@ -1011,7 +1011,7 @@
             this.Controls.Add(this.nameTxtBox);
             this.Controls.Add(this.nameTxt);
             this.Name = "BilgiGiris";
-            this.Text = "Form1";
+            this.Text = "Bilgi Giriş";
             this.Load += new System.EventHandler(this.BilgiGiris_Load);
             this.contactGroupBox.ResumeLayout(false);
             this.contactGroupBox.PerformLayout();

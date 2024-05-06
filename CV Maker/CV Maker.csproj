@@ -67,7 +67,6 @@
     <Compile Include="pdf.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Skill_StarBase.cs" />
     <EmbeddedResource Include="Bilgi_Giris.resx">
       <DependentUpon>Bilgi_Giris.cs</DependentUpon>
     </EmbeddedResource>
