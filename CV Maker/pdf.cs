@@ -508,8 +508,8 @@ public class PdfHelper
 
         // "Sertifikalar" metnini genişliğe göre tam ortala
         string certificateLine = lines[14].Trim(); // Projelerin tamamını al, başındaki ve sonundaki boşlukları temizle
-        XSize certificateSize = gfx.MeasureString(certificateLine, font);
-        double textX = 257 + (rectWidth - certificateSize.Width) / 2;
+        XSize certificateSize = gfx.MeasureString("Sertifikalar", new XFont("Arial", 25));
+        double textX = 247 + (rectWidth - certificateSize.Width) / 2;
         gfx.DrawString("Sertifikalar", new XFont("Arial", 25), XBrushes.Black, textX, startY);
 
         // Alt çizgi çizmek için DashStyle belirleyin

@@ -61,7 +61,7 @@
             this.phoneNubmerTxt = new System.Windows.Forms.Label();
             this.contactTxt = new System.Windows.Forms.Label();
             this.certificateRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.ozetTxt = new System.Windows.Forms.Label();
+            this.certificateTxt = new System.Windows.Forms.Label();
             this.projectRichTextBox = new System.Windows.Forms.RichTextBox();
             this.projectTxt = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -71,14 +71,14 @@
             this.saveEduBtn = new System.Windows.Forms.Button();
             this.finishTimePicker = new System.Windows.Forms.DateTimePicker();
             this.startTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.finishDateTxt = new System.Windows.Forms.Label();
+            this.startDateTxt = new System.Windows.Forms.Label();
             this.finishPointTextBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.finishPointTxt = new System.Windows.Forms.Label();
             this.programTextBox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.programTxt = new System.Windows.Forms.Label();
             this.schoolNameTextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.schollNameTxt = new System.Windows.Forms.Label();
             this.educationTxt = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.deleteJob = new System.Windows.Forms.Button();
@@ -87,25 +87,25 @@
             this.saveJobExpBtn = new System.Windows.Forms.Button();
             this.jobFinishPicker = new System.Windows.Forms.DateTimePicker();
             this.jobStartPicker = new System.Windows.Forms.DateTimePicker();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.finishDateTxt1 = new System.Windows.Forms.Label();
+            this.startDateTxt1 = new System.Windows.Forms.Label();
             this.positionTextBox = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.positionTxt = new System.Windows.Forms.Label();
             this.companyTextBox = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.companyTxt = new System.Windows.Forms.Label();
             this.jobTextBox = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.jobNameTxt = new System.Windows.Forms.Label();
+            this.jobExpTxt = new System.Windows.Forms.Label();
             this.hobiesRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.label12 = new System.Windows.Forms.Label();
+            this.hobiesTxt = new System.Windows.Forms.Label();
             this.pdfShowcaseBtn = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this.imgUploadTxt = new System.Windows.Forms.Label();
             this.languageListBox = new System.Windows.Forms.ListBox();
             this.languageProcessBtn = new System.Windows.Forms.Button();
             this.languageComboBox = new System.Windows.Forms.ComboBox();
             this.tierComboBox = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.languageLevelTxt = new System.Windows.Forms.Label();
             this.languageDeleteBtn = new System.Windows.Forms.Button();
             this.contactGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -461,16 +461,16 @@
             this.certificateRichTextBox.TabIndex = 28;
             this.certificateRichTextBox.Text = "";
             // 
-            // ozetTxt
+            // certificateTxt
             // 
-            this.ozetTxt.AutoSize = true;
-            this.ozetTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.ozetTxt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ozetTxt.Location = new System.Drawing.Point(844, 353);
-            this.ozetTxt.Name = "ozetTxt";
-            this.ozetTxt.Size = new System.Drawing.Size(84, 20);
-            this.ozetTxt.TabIndex = 25;
-            this.ozetTxt.Text = "Sertifikalar";
+            this.certificateTxt.AutoSize = true;
+            this.certificateTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.certificateTxt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.certificateTxt.Location = new System.Drawing.Point(844, 353);
+            this.certificateTxt.Name = "certificateTxt";
+            this.certificateTxt.Size = new System.Drawing.Size(84, 20);
+            this.certificateTxt.TabIndex = 25;
+            this.certificateTxt.Text = "Sertifikalar";
             // 
             // projectRichTextBox
             // 
@@ -500,14 +500,14 @@
             this.groupBox1.Controls.Add(this.saveEduBtn);
             this.groupBox1.Controls.Add(this.finishTimePicker);
             this.groupBox1.Controls.Add(this.startTimePicker);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.finishDateTxt);
+            this.groupBox1.Controls.Add(this.startDateTxt);
             this.groupBox1.Controls.Add(this.finishPointTextBox);
-            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.finishPointTxt);
             this.groupBox1.Controls.Add(this.programTextBox);
-            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.programTxt);
             this.groupBox1.Controls.Add(this.schoolNameTextBox);
-            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.schollNameTxt);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox1.Location = new System.Drawing.Point(801, 31);
@@ -518,13 +518,14 @@
             // 
             // deleteEdu
             // 
+            this.deleteEdu.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.deleteEdu.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.deleteEdu.Location = new System.Drawing.Point(6, 282);
             this.deleteEdu.Name = "deleteEdu";
             this.deleteEdu.Size = new System.Drawing.Size(130, 30);
             this.deleteEdu.TabIndex = 100;
             this.deleteEdu.Text = "Sil";
-            this.deleteEdu.UseVisualStyleBackColor = true;
+            this.deleteEdu.UseVisualStyleBackColor = false;
             this.deleteEdu.Click += new System.EventHandler(this.deleteEdu_Click);
             // 
             // listBoxEdu
@@ -574,27 +575,27 @@
             this.startTimePicker.Size = new System.Drawing.Size(140, 20);
             this.startTimePicker.TabIndex = 18;
             // 
-            // label5
+            // finishDateTxt
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label5.Location = new System.Drawing.Point(169, 187);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(100, 20);
-            this.label5.TabIndex = 31;
-            this.label5.Text = "Bitirme Tarihi";
+            this.finishDateTxt.AutoSize = true;
+            this.finishDateTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.finishDateTxt.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.finishDateTxt.Location = new System.Drawing.Point(169, 187);
+            this.finishDateTxt.Name = "finishDateTxt";
+            this.finishDateTxt.Size = new System.Drawing.Size(100, 20);
+            this.finishDateTxt.TabIndex = 31;
+            this.finishDateTxt.Text = "Bitirme Tarihi";
             // 
-            // label4
+            // startDateTxt
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label4.Location = new System.Drawing.Point(24, 188);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(113, 20);
-            this.label4.TabIndex = 30;
-            this.label4.Text = "Başlama Tarihi";
+            this.startDateTxt.AutoSize = true;
+            this.startDateTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.startDateTxt.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.startDateTxt.Location = new System.Drawing.Point(24, 188);
+            this.startDateTxt.Name = "startDateTxt";
+            this.startDateTxt.Size = new System.Drawing.Size(113, 20);
+            this.startDateTxt.TabIndex = 30;
+            this.startDateTxt.Text = "Başlama Tarihi";
             // 
             // finishPointTextBox
             // 
@@ -605,16 +606,16 @@
             this.finishPointTextBox.Size = new System.Drawing.Size(144, 20);
             this.finishPointTextBox.TabIndex = 17;
             // 
-            // label3
+            // finishPointTxt
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label3.Location = new System.Drawing.Point(6, 131);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(102, 20);
-            this.label3.TabIndex = 28;
-            this.label3.Text = "Bitirme Puanı";
+            this.finishPointTxt.AutoSize = true;
+            this.finishPointTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.finishPointTxt.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.finishPointTxt.Location = new System.Drawing.Point(6, 131);
+            this.finishPointTxt.Name = "finishPointTxt";
+            this.finishPointTxt.Size = new System.Drawing.Size(102, 20);
+            this.finishPointTxt.TabIndex = 28;
+            this.finishPointTxt.Text = "Bitirme Puanı";
             // 
             // programTextBox
             // 
@@ -625,16 +626,16 @@
             this.programTextBox.Size = new System.Drawing.Size(144, 20);
             this.programTextBox.TabIndex = 16;
             // 
-            // label2
+            // programTxt
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label2.Location = new System.Drawing.Point(6, 73);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 20);
-            this.label2.TabIndex = 26;
-            this.label2.Text = "Programı";
+            this.programTxt.AutoSize = true;
+            this.programTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.programTxt.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.programTxt.Location = new System.Drawing.Point(6, 73);
+            this.programTxt.Name = "programTxt";
+            this.programTxt.Size = new System.Drawing.Size(69, 20);
+            this.programTxt.TabIndex = 26;
+            this.programTxt.Text = "Program";
             // 
             // schoolNameTextBox
             // 
@@ -645,16 +646,16 @@
             this.schoolNameTextBox.Size = new System.Drawing.Size(144, 20);
             this.schoolNameTextBox.TabIndex = 15;
             // 
-            // label1
+            // schollNameTxt
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label1.Location = new System.Drawing.Point(6, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 20);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "Okul Adı";
+            this.schollNameTxt.AutoSize = true;
+            this.schollNameTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.schollNameTxt.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.schollNameTxt.Location = new System.Drawing.Point(6, 16);
+            this.schollNameTxt.Name = "schollNameTxt";
+            this.schollNameTxt.Size = new System.Drawing.Size(68, 20);
+            this.schollNameTxt.TabIndex = 24;
+            this.schollNameTxt.Text = "Okul Adı";
             // 
             // educationTxt
             // 
@@ -676,14 +677,14 @@
             this.groupBox2.Controls.Add(this.saveJobExpBtn);
             this.groupBox2.Controls.Add(this.jobFinishPicker);
             this.groupBox2.Controls.Add(this.jobStartPicker);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.finishDateTxt1);
+            this.groupBox2.Controls.Add(this.startDateTxt1);
             this.groupBox2.Controls.Add(this.positionTextBox);
-            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.positionTxt);
             this.groupBox2.Controls.Add(this.companyTextBox);
-            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.companyTxt);
             this.groupBox2.Controls.Add(this.jobTextBox);
-            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.jobNameTxt);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.groupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox2.Location = new System.Drawing.Point(1099, 32);
@@ -750,27 +751,27 @@
             this.jobStartPicker.Size = new System.Drawing.Size(140, 20);
             this.jobStartPicker.TabIndex = 24;
             // 
-            // label6
+            // finishDateTxt1
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label6.Location = new System.Drawing.Point(170, 187);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(102, 20);
-            this.label6.TabIndex = 31;
-            this.label6.Text = "Ayrılma Tarihi";
+            this.finishDateTxt1.AutoSize = true;
+            this.finishDateTxt1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.finishDateTxt1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.finishDateTxt1.Location = new System.Drawing.Point(170, 187);
+            this.finishDateTxt1.Name = "finishDateTxt1";
+            this.finishDateTxt1.Size = new System.Drawing.Size(102, 20);
+            this.finishDateTxt1.TabIndex = 31;
+            this.finishDateTxt1.Text = "Ayrılma Tarihi";
             // 
-            // label7
+            // startDateTxt1
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label7.Location = new System.Drawing.Point(17, 187);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(113, 20);
-            this.label7.TabIndex = 30;
-            this.label7.Text = "Başlama Tarihi";
+            this.startDateTxt1.AutoSize = true;
+            this.startDateTxt1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.startDateTxt1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.startDateTxt1.Location = new System.Drawing.Point(17, 187);
+            this.startDateTxt1.Name = "startDateTxt1";
+            this.startDateTxt1.Size = new System.Drawing.Size(113, 20);
+            this.startDateTxt1.TabIndex = 30;
+            this.startDateTxt1.Text = "Başlama Tarihi";
             // 
             // positionTextBox
             // 
@@ -781,16 +782,16 @@
             this.positionTextBox.Size = new System.Drawing.Size(140, 20);
             this.positionTextBox.TabIndex = 23;
             // 
-            // label8
+            // positionTxt
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label8.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label8.Location = new System.Drawing.Point(6, 131);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(134, 20);
-            this.label8.TabIndex = 28;
-            this.label8.Text = "Çalışılan Pozisyon";
+            this.positionTxt.AutoSize = true;
+            this.positionTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.positionTxt.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.positionTxt.Location = new System.Drawing.Point(6, 131);
+            this.positionTxt.Name = "positionTxt";
+            this.positionTxt.Size = new System.Drawing.Size(134, 20);
+            this.positionTxt.TabIndex = 28;
+            this.positionTxt.Text = "Çalışılan Pozisyon";
             // 
             // companyTextBox
             // 
@@ -801,16 +802,16 @@
             this.companyTextBox.Size = new System.Drawing.Size(140, 20);
             this.companyTextBox.TabIndex = 22;
             // 
-            // label9
+            // companyTxt
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label9.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label9.Location = new System.Drawing.Point(6, 73);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(77, 20);
-            this.label9.TabIndex = 26;
-            this.label9.Text = "Şirket Adı";
+            this.companyTxt.AutoSize = true;
+            this.companyTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.companyTxt.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.companyTxt.Location = new System.Drawing.Point(6, 73);
+            this.companyTxt.Name = "companyTxt";
+            this.companyTxt.Size = new System.Drawing.Size(77, 20);
+            this.companyTxt.TabIndex = 26;
+            this.companyTxt.Text = "Şirket Adı";
             // 
             // jobTextBox
             // 
@@ -821,27 +822,27 @@
             this.jobTextBox.Size = new System.Drawing.Size(140, 20);
             this.jobTextBox.TabIndex = 21;
             // 
-            // label10
+            // jobNameTxt
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label10.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label10.Location = new System.Drawing.Point(6, 16);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(22, 20);
-            this.label10.TabIndex = 24;
-            this.label10.Text = "İş";
+            this.jobNameTxt.AutoSize = true;
+            this.jobNameTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.jobNameTxt.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.jobNameTxt.Location = new System.Drawing.Point(6, 16);
+            this.jobNameTxt.Name = "jobNameTxt";
+            this.jobNameTxt.Size = new System.Drawing.Size(22, 20);
+            this.jobNameTxt.TabIndex = 24;
+            this.jobNameTxt.Text = "İş";
             // 
-            // label11
+            // jobExpTxt
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label11.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label11.Location = new System.Drawing.Point(1095, 9);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(91, 20);
-            this.label11.TabIndex = 32;
-            this.label11.Text = "İş Deneyimi";
+            this.jobExpTxt.AutoSize = true;
+            this.jobExpTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.jobExpTxt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.jobExpTxt.Location = new System.Drawing.Point(1095, 9);
+            this.jobExpTxt.Name = "jobExpTxt";
+            this.jobExpTxt.Size = new System.Drawing.Size(91, 20);
+            this.jobExpTxt.TabIndex = 32;
+            this.jobExpTxt.Text = "İş Deneyimi";
             // 
             // hobiesRichTextBox
             // 
@@ -851,16 +852,16 @@
             this.hobiesRichTextBox.TabIndex = 30;
             this.hobiesRichTextBox.Text = "";
             // 
-            // label12
+            // hobiesTxt
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label12.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label12.Location = new System.Drawing.Point(1116, 353);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(59, 20);
-            this.label12.TabIndex = 33;
-            this.label12.Text = "Hobiler";
+            this.hobiesTxt.AutoSize = true;
+            this.hobiesTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.hobiesTxt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.hobiesTxt.Location = new System.Drawing.Point(1116, 353);
+            this.hobiesTxt.Name = "hobiesTxt";
+            this.hobiesTxt.Size = new System.Drawing.Size(59, 20);
+            this.hobiesTxt.TabIndex = 33;
+            this.hobiesTxt.Text = "Hobiler";
             // 
             // pdfShowcaseBtn
             // 
@@ -886,16 +887,16 @@
             this.pictureBox.TabStop = false;
             this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
             // 
-            // label13
+            // imgUploadTxt
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label13.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label13.Location = new System.Drawing.Point(1251, 353);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(98, 20);
-            this.label13.TabIndex = 37;
-            this.label13.Text = "Resim Yükle";
+            this.imgUploadTxt.AutoSize = true;
+            this.imgUploadTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.imgUploadTxt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.imgUploadTxt.Location = new System.Drawing.Point(1251, 353);
+            this.imgUploadTxt.Name = "imgUploadTxt";
+            this.imgUploadTxt.Size = new System.Drawing.Size(98, 20);
+            this.imgUploadTxt.TabIndex = 37;
+            this.imgUploadTxt.Text = "Resim Yükle";
             // 
             // languageListBox
             // 
@@ -907,6 +908,7 @@
             // 
             // languageProcessBtn
             // 
+            this.languageProcessBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.languageProcessBtn.Location = new System.Drawing.Point(207, 548);
             this.languageProcessBtn.Name = "languageProcessBtn";
             this.languageProcessBtn.Size = new System.Drawing.Size(93, 33);
@@ -942,19 +944,20 @@
             this.tierComboBox.Size = new System.Drawing.Size(283, 21);
             this.tierComboBox.TabIndex = 7;
             // 
-            // label14
+            // languageLevelTxt
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label14.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label14.Location = new System.Drawing.Point(12, 368);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(156, 20);
-            this.label14.TabIndex = 45;
-            this.label14.Text = "Dilin Seviyesini Seçin";
+            this.languageLevelTxt.AutoSize = true;
+            this.languageLevelTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.languageLevelTxt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.languageLevelTxt.Location = new System.Drawing.Point(12, 368);
+            this.languageLevelTxt.Name = "languageLevelTxt";
+            this.languageLevelTxt.Size = new System.Drawing.Size(156, 20);
+            this.languageLevelTxt.TabIndex = 45;
+            this.languageLevelTxt.Text = "Dilin Seviyesini Seçin";
             // 
             // languageDeleteBtn
             // 
+            this.languageDeleteBtn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.languageDeleteBtn.Location = new System.Drawing.Point(108, 548);
             this.languageDeleteBtn.Name = "languageDeleteBtn";
             this.languageDeleteBtn.Size = new System.Drawing.Size(93, 33);
@@ -970,24 +973,24 @@
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1423, 593);
             this.Controls.Add(this.languageDeleteBtn);
-            this.Controls.Add(this.label14);
+            this.Controls.Add(this.languageLevelTxt);
             this.Controls.Add(this.tierComboBox);
             this.Controls.Add(this.languageComboBox);
             this.Controls.Add(this.languageProcessBtn);
             this.Controls.Add(this.languageListBox);
-            this.Controls.Add(this.label13);
+            this.Controls.Add(this.imgUploadTxt);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.pdfShowcaseBtn);
             this.Controls.Add(this.hobiesRichTextBox);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
+            this.Controls.Add(this.hobiesTxt);
+            this.Controls.Add(this.jobExpTxt);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.educationTxt);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.projectRichTextBox);
             this.Controls.Add(this.projectTxt);
             this.Controls.Add(this.certificateRichTextBox);
-            this.Controls.Add(this.ozetTxt);
+            this.Controls.Add(this.certificateTxt);
             this.Controls.Add(this.contactTxt);
             this.Controls.Add(this.contactGroupBox);
             this.Controls.Add(this.sumRichTextBox);
@@ -1060,45 +1063,45 @@
         private System.Windows.Forms.Label githubTxt;
         private System.Windows.Forms.TextBox githubTextBox;
         private System.Windows.Forms.RichTextBox certificateRichTextBox;
-        private System.Windows.Forms.Label ozetTxt;
+        private System.Windows.Forms.Label certificateTxt;
         private System.Windows.Forms.RichTextBox projectRichTextBox;
         private System.Windows.Forms.Label projectTxt;
         public System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label educationTxt;
         private System.Windows.Forms.TextBox programTextBox;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label programTxt;
         private System.Windows.Forms.TextBox schoolNameTextBox;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label schollNameTxt;
         private System.Windows.Forms.DateTimePicker finishTimePicker;
         private System.Windows.Forms.DateTimePicker startTimePicker;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label finishDateTxt;
+        private System.Windows.Forms.Label startDateTxt;
         private System.Windows.Forms.TextBox finishPointTextBox;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label finishPointTxt;
         private System.Windows.Forms.Button saveEduBtn;
         public System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button saveJobExpBtn;
         private System.Windows.Forms.DateTimePicker jobFinishPicker;
         private System.Windows.Forms.DateTimePicker jobStartPicker;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label finishDateTxt1;
+        private System.Windows.Forms.Label startDateTxt1;
         private System.Windows.Forms.TextBox positionTextBox;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label positionTxt;
         private System.Windows.Forms.TextBox companyTextBox;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label companyTxt;
         private System.Windows.Forms.TextBox jobTextBox;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label jobNameTxt;
+        private System.Windows.Forms.Label jobExpTxt;
         private System.Windows.Forms.RichTextBox hobiesRichTextBox;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label hobiesTxt;
         private System.Windows.Forms.Button pdfShowcaseBtn;
         private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label imgUploadTxt;
         private System.Windows.Forms.ListBox languageListBox;
         private System.Windows.Forms.Button languageProcessBtn;
         private System.Windows.Forms.ComboBox languageComboBox;
         private System.Windows.Forms.ComboBox tierComboBox;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label languageLevelTxt;
         private System.Windows.Forms.CheckBox checkBoxEdu;
         private System.Windows.Forms.CheckBox checkBoxJobExp;
         private System.Windows.Forms.ListBox listBoxEdu;

@@ -4,20 +4,88 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json.Linq;
+using System.Xml;
 
 
 namespace CV_Maker
 {
     public partial class BilgiGiris : Form
     {
+        private Language selectedLanguage;
+
+        public enum Language
+        {
+            Turkish,
+            English,
+            None
+        }
+        private JObject translations;
+
         public BilgiGiris()
         {
             InitializeComponent();
+            LoadTranslations();
             InitializeTextBox(skills1TextBox);
             InitializeTextBox(skills2TextBox);
             InitializeRichTextBox(projectRichTextBox);
             InitializeRichTextBoxCertificate(certificateRichTextBox);
             InitializeRichTextBox(hobiesRichTextBox);
+        }
+        private void LoadTranslations()
+        {
+            string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+            string jsonPath = Path.Combine(projectDirectory, "translations.json");
+            string json = File.ReadAllText(jsonPath);
+            translations = JObject.Parse(json);
+        }
+
+        private string Translate(string key)
+        {
+            string lang = selectedLanguage == Language.Turkish ? "tr" : "en";
+            return translations[lang][key]?.ToString() ?? key;
+        }
+        private Language ShowLanguageSelectionDialog()
+        {
+            // Dil seçimi formunu oluştur
+            Form languageSelectionForm = new Form();
+            languageSelectionForm.Text = Translate("ChooseLanguage");
+            languageSelectionForm.Size = new Size(300, 150);
+
+            // Seçilen dili tutmak için değişken
+            Language selectedLanguage = Language.None;
+
+            // Türkçe butonunu oluştur
+            Button turkishButton = new Button();
+            turkishButton.Text = "Türkçe";
+            turkishButton.Size = new Size(100, 50);
+            turkishButton.Location = new Point(50, 30);
+            turkishButton.Click += (s, ev) =>
+            {
+                selectedLanguage = Language.Turkish;
+                languageSelectionForm.Close();
+            };
+
+            // İngilizce butonunu oluştur
+            Button englishButton = new Button();
+            englishButton.Text = "English";
+            englishButton.Size = new Size(100, 50);
+            englishButton.Location = new Point(150, 30);
+            englishButton.Click += (s, ev) =>
+            {
+                selectedLanguage = Language.English;
+                languageSelectionForm.Close();
+            };
+
+            // Butonları forma ekle
+            languageSelectionForm.Controls.Add(turkishButton);
+            languageSelectionForm.Controls.Add(englishButton);
+
+            // Dil seçimi formunu göster
+            languageSelectionForm.ShowDialog();
+
+            // Seçilen dili geri döndür
+            return selectedLanguage;
         }
         // BilgiGiris sınıfında
         public string Skills1Text
@@ -32,11 +100,63 @@ namespace CV_Maker
 
         private void BilgiGiris_Load(object sender, EventArgs e)
         {
+            selectedLanguage = ShowLanguageSelectionDialog();
+
             foreach (CultureInfo culture in CultureInfo.GetCultures(CultureTypes.NeutralCultures))
             {
                 languageComboBox.Items.Add(culture.DisplayName);
             }
+
+            UpdateTexts();
         }
+        private void UpdateTexts()
+        {
+            languageProcessBtn.Text = Translate("LanguageProcessBtn");
+            languageDeleteBtn.Text = Translate("LanguageDeleteBtn");
+            saveEduBtn.Text = Translate("SaveEduBtn");
+            saveJobExpBtn.Text = Translate("SaveJobExpBtn");
+            deleteEdu.Text = Translate("DeleteEdu");
+            deleteJob.Text = Translate("DeleteJob");
+            pdfShowcaseBtn.Text = Translate("PdfShowcaseBtn");
+            nameTxt.Text = Translate("NameLabel");
+            surnameTxt.Text = Translate("SurnameLabel");
+            jobExpTxt.Text = Translate("JobLabel");
+            skills1Txt.Text = Translate("Skills1Label");
+            skills2Txt.Text = Translate("Skills2Label");
+            languageTxt.Text = Translate("LanguageLabel");
+            languageLevelTxt.Text = Translate("LanguageLevelLabel");
+            summaryTxt.Text = Translate("SummaryLabel");
+            contactTxt.Text = Translate("ContactLabel");
+            educationTxt.Text = Translate("EducationLabel");
+            jobExpTxt.Text = Translate("JobExperienceLabel");
+            skillLevelTxt.Text = Translate("SkillLevelLabel");
+            highSkillsTxt.Text = Translate("HighSkillLabel");
+            midSkillsTxt.Text = Translate("MidSkillLabel");
+            lowSkillsTxt.Text = Translate("LowSkillLabel");
+            projectTxt.Text = Translate("ProjectLabel");
+            certificateTxt.Text = Translate("CertificateLabel");
+            hobiesTxt.Text = Translate("HobiesLabel");
+            imgUploadTxt.Text = Translate("ImageUploadLabel");
+            phoneNubmerTxt.Text = Translate("PhoneLabel");
+            emailTxt.Text = Translate("EmailLabel");
+            adressTxt.Text = Translate("AdressLabel");
+            finishPointTxt.Text = Translate("FinishPointLabel");
+            startDateTxt.Text = Translate("StartDateLabel");
+            finishDateTxt.Text = Translate("FinishDateLabel");
+            startDateTxt1.Text = Translate("StartDateLabel");
+            finishDateTxt1.Text = Translate("FinishDateLabel");
+            checkBoxEdu.Text = Translate("CheckboxEdu");
+            checkBoxJobExp.Text = Translate("CheckboxJobExpLabel");
+            jobNameTxt.Text = Translate("JobNameLabel");
+            companyTxt.Text = Translate("CompanyLabel");
+            positionTxt.Text = Translate("PositionLabel");
+            skills1TextBox.Text = Translate("Comma");
+            skills2TextBox.Text = Translate("Comma");
+            projectRichTextBox.Text = Translate("Comma");
+            hobiesRichTextBox.Text = Translate("Comma");
+            certificateRichTextBox.Text = Translate("TakeDate");
+        }
+
         private void languageProcessBtn_Click(object sender, EventArgs e)
         {
             string selectedLanguagesAndTier = $"{languageComboBox.SelectedItem} - {tierComboBox.SelectedItem}";
@@ -44,7 +164,14 @@ namespace CV_Maker
         }
         private void languageDeleteBtn_Click(object sender, EventArgs e)
         {
-            languageListBox.Items.RemoveAt(languageListBox.SelectedIndex);
+            try
+            {
+                languageListBox.Items.RemoveAt(languageListBox.SelectedIndex);
+            }
+            catch
+            {
+                MessageBox.Show(Translate("ErrorDelete"));
+            }
         }
         public string[] SplitterSkills()
         {
@@ -53,7 +180,7 @@ namespace CV_Maker
             // İki metni birleştir ve virgülle ayır
             string combinedText = skills1TextBox.Text + "," + skills2TextBox.Text;
 
-            if (!string.IsNullOrEmpty(combinedText) && !(combinedText.Contains("Yazarken aralarına virgül bırakın!")))
+            if (!string.IsNullOrEmpty(combinedText) && !combinedText.Contains(Translate("Comma")))
             {
                 allSkills = combinedText.Split(',');
             }
@@ -90,14 +217,19 @@ namespace CV_Maker
             if (e.NewValue == CheckState.Checked && e.CurrentValue != CheckState.Checked) // Yeni işaret durumu "işaretlenmiş" ise ve önceki durumu "işaretlenmemiş" ise
             {
                 totalCheckedSkills++; // Toplam işaretlenmiş yetenek sayısını arttır
-                if (totalCheckedSkills == (highSkillsCheckBox.Items.Count)*2) // Eğer tüm yetenekler işaretlendi ise
+                if (totalCheckedSkills == (highSkillsCheckBox.Items.Count) * 2) // Eğer tüm yetenekler işaretlendi ise
                 {
                     OpenNewForm(); // Yeni form aç
                 }
             }
             else if (e.NewValue != CheckState.Checked && e.CurrentValue == CheckState.Checked) // Yeni işaret durumu "işaretlenmemiş" ise ve önceki durumu "işaretlenmiş" ise
             {
-                --totalCheckedSkills; // Toplam işaretlenmiş yetenek sayısını azalt
+                --totalCheckedSkills;
+                if (totalCheckedSkills <= 0)
+                {
+                    totalCheckedSkills=0;
+                }
+                // Toplam işaretlenmiş yetenek sayısını azalt
             }
 
             if (e.NewValue == CheckState.Checked) // Eğer yeni işaret durumu "işaretlenmiş" ise
@@ -123,7 +255,7 @@ namespace CV_Maker
 
         private void OpenNewForm()
         {
-            Skill_Star skill_Star =new Skill_Star();
+            Skill_Star skill_Star = new Skill_Star();
             skill_Star.Show();
         }
 
@@ -149,7 +281,7 @@ namespace CV_Maker
 
             if (checkBoxEdu.Checked)
             {
-                educationInfo[0] = "Eğitim bilgisi yok";
+                educationInfo[0] = Translate("CheckboxEdu");
 
                 // Eğitim bilgilerini ListBox'a ekle
                 listBoxEdu.Items.Add(educationInfo[0]);
@@ -163,12 +295,12 @@ namespace CV_Maker
                 schoolDepartment = programTextBox.Text;
                 finishPoint = finishPointTextBox.Text;
                 startDate = $"{startTimePicker.Value.Month}.{startTimePicker.Value.Year}";
-                finishDate = finishTimePicker.Checked ? $"{finishTimePicker.Value.Month}.{finishTimePicker.Value.Year}" : "Devam etmekte";
+                finishDate = finishTimePicker.Checked ? $"{finishTimePicker.Value.Month}.{finishTimePicker.Value.Year}" : Translate("Continue");
 
                 //Boş bilgileri yokla
                 if (schoolName == "" && schoolDepartment == "" && finishPoint == "")
                 {
-                    educationInfo[0] = "Eğitim bilgisi yok";
+                    educationInfo[0] = Translate("CheckboxEdu");
                     // Eğitim bilgilerini ListBox'a ekle
                     listBoxEdu.Items.Add(educationInfo[0]);
 
@@ -178,17 +310,17 @@ namespace CV_Maker
                 }
                 else if (schoolName == "")
                 {
-                    MessageBox.Show("Okul adı boş.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Translate("NullSchollName"), Translate("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 else if (schoolDepartment == "")
                 {
-                    MessageBox.Show("Program boş.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Translate("NullProgram"), Translate("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 else if (finishPoint == "")
                 {
-                    MessageBox.Show("Bitirme puanı boş.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Translate("NullFinishPoint"), Translate("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -197,7 +329,7 @@ namespace CV_Maker
                 {
                     if (startTimePicker.Value > finishTimePicker.Value)
                     {
-                        MessageBox.Show("Başlangıç tarihi bitiş tarihinden önce olamaz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Translate("DateError"), Translate("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return; // Doğrulama başarısız olduğu için işlemi sonlandır
                     }
                 }
@@ -221,7 +353,7 @@ namespace CV_Maker
 
             if (checkBoxJobExp.Checked)
             {
-                jobInfo[0] = "İş bilgisi yok";
+                jobInfo[0] = Translate("CheckboxJobExpLabel");
 
                 // İş bilgilerini ListBox'a ekle
                 listBoxJobExp.Items.Add(jobInfo[0]);
@@ -235,12 +367,12 @@ namespace CV_Maker
                 companyName = companyTextBox.Text;
                 positionName = positionTextBox.Text;
                 startDate = $"{jobStartPicker.Value.Month}.{jobStartPicker.Value.Year}";
-                finishDate = jobFinishPicker.Checked ? $"{jobFinishPicker.Value.Month}.{jobFinishPicker.Value.Year}" : "Devam etmekte";
+                finishDate = jobFinishPicker.Checked ? $"{jobFinishPicker.Value.Month}.{jobFinishPicker.Value.Year}" : Translate("Continue");
 
                 //Boş bilgileri yokla
                 if (jobName == "" && companyName == "" && positionName == "")
                 {
-                    jobInfo[0] = "İş bilgisi yok";
+                    jobInfo[0] = Translate("CheckboxJobExpLabel");
                     listBoxJobExp.Items.Add(jobInfo[0]);
 
                     // GroupBox içindeki metin kutularını temizle
@@ -249,17 +381,17 @@ namespace CV_Maker
                 }
                 else if (jobName == "")
                 {
-                    MessageBox.Show("İş adı boş.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Translate("NullJoblName"), Translate("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 else if (companyName == "")
                 {
-                    MessageBox.Show("Şirket boş.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Translate("NullCompany"), Translate("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 else if (positionName == "")
                 {
-                    MessageBox.Show("Pozisyon boş.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Translate("NullPosition"), Translate("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -272,7 +404,7 @@ namespace CV_Maker
                 {
                     if (jobStartPicker.Value > jobFinishPicker.Value)
                     {
-                        MessageBox.Show("Başlangıç tarihi bitiş tarihinden önce olamaz.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(Translate("DateError"), Translate("Error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return; // Doğrulama başarısız olduğu için işlemi sonlandır
                     }
                 }
@@ -303,7 +435,7 @@ namespace CV_Maker
             if (textBox is TextBox || textBox is RichTextBox)
             {
                 textBox.ForeColor = Color.Gray;
-                textBox.Text = "Yazarken aralarına virgül bırakın!";
+                textBox.Text = Translate("Comma");
                 textBox.Enter += TextBox_Enter;
                 textBox.Leave += TextBox_Leave;
             }
@@ -313,7 +445,7 @@ namespace CV_Maker
             if (textBox is TextBox || textBox is RichTextBox)
             {
                 textBox.ForeColor = Color.Gray;
-                textBox.Text = "Yazarken aralarına virgül bırakın!";
+                textBox.Text = Translate("Comma");
                 textBox.Enter += TextBox_Enter;
                 textBox.Leave += TextBox_LeaveForRichText;
             }
@@ -323,7 +455,7 @@ namespace CV_Maker
             if (textBox is TextBox || textBox is RichTextBox)
             {
                 textBox.ForeColor = Color.Gray;
-                textBox.Text = "'Alınma Tarihi' - 'Sertifika Adı' Şeklinde Yazınız";
+                textBox.Text = Translate("TakeDate");
                 textBox.Enter += TextBox_EnterCertificate;
                 textBox.Leave += TextBox_LeaveForRichTextCertificate;
             }
@@ -331,7 +463,7 @@ namespace CV_Maker
         private void TextBox_Enter(object sender, EventArgs e)
         {
             Control textBox = (Control)sender;
-            if (textBox.Text == "Yazarken aralarına virgül bırakın!")
+            if (textBox.Text == Translate("Comma"))
             {
                 textBox.Text = "";
                 textBox.ForeColor = SystemColors.WindowText;
@@ -340,7 +472,7 @@ namespace CV_Maker
         private void TextBox_EnterCertificate(object sender, EventArgs e)
         {
             Control textBox = (Control)sender;
-            if (textBox.Text == "'Alınma Tarihi' - 'Sertifika Adı' Şeklinde Yazınız")
+            if (textBox.Text == Translate("TakeDate"))
             {
                 textBox.Text = "";
                 textBox.ForeColor = SystemColors.WindowText;
@@ -351,10 +483,10 @@ namespace CV_Maker
             Control textBox = (Control)sender;
             if (string.IsNullOrWhiteSpace(textBox.Text))
             {
-                textBox.Text = "Yazarken aralarına virgül bırakın!";
+                textBox.Text = Translate("Comma");
                 textBox.ForeColor = Color.Gray;
             }
-            if (!textBox.Text.Contains("Yazarken aralarına virgül bırakın"))
+            if (!textBox.Text.Contains(Translate("Comma")))
             {
                 SplitterSkills();
                 FillCheckBoxes();
@@ -365,7 +497,7 @@ namespace CV_Maker
             Control textBox = (Control)sender;
             if (string.IsNullOrWhiteSpace(textBox.Text))
             {
-                textBox.Text = "'Alınma Tarihi' - 'Sertifika Adı' Şeklinde Yazınız";
+                textBox.Text = Translate("TakeDate");
                 textBox.ForeColor = Color.Gray;
             }
         }
@@ -374,7 +506,7 @@ namespace CV_Maker
             Control textBox = (Control)sender;
             if (string.IsNullOrWhiteSpace(textBox.Text))
             {
-                textBox.Text = "Yazarken aralarına virgül bırakın!";
+                textBox.Text = Translate("Comma");
                 textBox.ForeColor = Color.Gray;
             }
         }
